@@ -1,0 +1,27 @@
+{
+  "name": "lettuce",
+  "version": "0.0.1",
+  "authors": [
+    "Fengda HUANG <h@phodal.com>"
+  ],
+  "description": "A Mobile JavaScript Framework",
+  "main": "index.js",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "lettuce",
+    "mobile"
+  ],
+  "license": "MIT",
+  "homepage": "http://lettuce.phodal.com",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
