@@ -1,6 +1,6 @@
 {
     "name": "lettuce",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "authors": [
         "Fengda HUANG <h@phodal.com>"
     ],
@@ -18,11 +18,6 @@
     "homepage": "http://lettuce.phodal.com",
     "private": false,
     "dependencies": {
-        "requirejs": "~2.1.5",
-        "jquery": ">= 2.1.0",
-        "qunit": "~1.16.0",
-        "underscore": "~1.7.0",
-        "requirejs-plugins": "1.0.3"
     },
     "ignore": [
         "**/.*",
