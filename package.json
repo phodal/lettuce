@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/phodal/lettuce"
+    "url": "git://github.com/phodal/lettuce.git"
   },
   "keywords": [
     "lettuce",
@@ -16,5 +16,15 @@
     "mvvm"
   ],
   "author": "Phodal Huang",
-  "license": "MIT"
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-qunit": "~0.3.0"
+  }
 }
