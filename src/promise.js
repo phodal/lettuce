@@ -53,4 +53,4 @@ var promise = {
     chain: chain
 };
 
-Lettuce.prototype.promise = promise;
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);

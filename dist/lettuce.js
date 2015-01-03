@@ -12,6 +12,34 @@ Lettuce.VERSION = '0.0.1';
 root.lettuce = Lettuce;
 
 
+//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+
+Lettuce.isObject = function (obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+};
+
+
+Lettuce.extend = function (obj) {
+    console.log(obj);
+    if (!Lettuce.isObject(obj)) {
+        return obj;
+    }
+    var source, prop;
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        source = arguments[i];
+        console.log(source);
+        for (prop in source) {
+            if (hasOwnProperty.call(source, prop)) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
+
+
 /*
  *  Copyright 2012-2013 (c) Pierre Duquesne <stackp@online.fr>
  *  Licensed under the New BSD License.
@@ -62,12 +90,8 @@ function chain (funcs, args) {
     return p;
 }
 
-var promise = {
-    Promise: Promise,
-    chain: chain
-};
-
-Lettuce.prototype.promise = promise;
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, Promise);
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype.Promise, chain);
 
 
 /**
