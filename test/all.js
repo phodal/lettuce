@@ -1,5 +1,8 @@
-QUnit.test("the base function exists", function(assert) {
+QUnit.test("the base function exists", function (assert) {
+    assert.expect(2);
+
     var done = assert.async();
+    var done2 = assert.async();
 
     function late(n) {
         console.log(n);
@@ -9,27 +12,10 @@ QUnit.test("the base function exists", function(assert) {
     }
 
     late(100).then(
-        function(err, n) {
-            return late(n + 200);
-        }
+        assert.ok(true, "test promise then 1"),
+        done()
     ).then(
-        function(err, n) {
-            return late(n + 300);
-        }
-    ).then(
-        function(err, n) {
-            return late(n + 400);
-        }
-    ).then(
-        callback
-    );
-
-    function callback(err, n){
-        console.log(n);
-        if(n === 1000) {
-            done();
-        }
-    }
-    //
-    //ok(lettuce);
+        assert.ok(true, "test promise then 2"),
+        done2()
+    )
 });
