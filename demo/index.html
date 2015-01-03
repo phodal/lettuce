@@ -24,12 +24,33 @@
     <script src="./../dist/lettuce.js"></script>
 
     <script>
-      /* begin demo script */
+        function late(n) {
+            var L = new lettuce();
+            var p = new L.promise.Promise();
+            setTimeout(function() {
+                p.done(null, n);
+            }, n);
+            return p;
+        }
 
-      var n = lettuce();
-      console.log(n);
+        late(100).then(
+            function(err, n) {
+                return late(n + 200);
+            }
+        ).then(
+            function(err, n) {
+                return late(n + 300);
+            }
+        ).then(
+            function(err, n) {
+                return late(n + 400);
+            }
+        ).then(
+            function(err, n) {
+                console.log(n);
+            }
+        );
 
-      /* end demo script */
     </script>
   </body>
 </html>

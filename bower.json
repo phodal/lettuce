@@ -1,27 +1,34 @@
 {
-  "name": "lettuce",
-  "version": "0.0.1",
-  "authors": [
-    "Fengda HUANG <h@phodal.com>"
-  ],
-  "description": "A Mobile JavaScript Framework",
-  "main": "index.js",
-  "moduleType": [
-    "amd",
-    "node"
-  ],
-  "keywords": [
-    "lettuce",
-    "mobile"
-  ],
-  "license": "MIT",
-  "homepage": "http://lettuce.phodal.com",
-  "private": false,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "name": "lettuce",
+    "version": "0.0.1",
+    "authors": [
+        "Fengda HUANG <h@phodal.com>"
+    ],
+    "description": "A Mobile JavaScript Framework",
+    "main": "index.js",
+    "moduleType": [
+        "amd",
+        "node"
+    ],
+    "keywords": [
+        "lettuce",
+        "mobile"
+    ],
+    "license": "MIT",
+    "homepage": "http://lettuce.phodal.com",
+    "private": false,
+    "dependencies": {
+        "requirejs": "~2.1.5",
+        "jquery": ">= 2.1.0",
+        "qunit": "~1.16.0",
+        "underscore": "~1.7.0",
+        "requirejs-plugins": "1.0.3"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
 }
