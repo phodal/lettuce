@@ -1,17 +1,3 @@
-(function(root, undefined) {
-
-  "use strict";
-
-
-var Lettuce = function() {
-
-};
-
-Lettuce.VERSION = '0.0.1';
-
-root.lettuce = Lettuce;
-
-
 /*
  *  Copyright 2012-2013 (c) Pierre Duquesne <stackp@online.fr>
  *  Licensed under the New BSD License.
@@ -68,6 +54,3 @@ var promise = {
 };
 
 Lettuce.prototype.promise = promise;
-
-
-}(this));

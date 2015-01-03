@@ -1,4 +1,4 @@
-QUnit.test("the base function exists", function (assert) {
+QUnit.test("test for promise then", function (assert) {
     assert.expect(2);
 
     var done = assert.async();
