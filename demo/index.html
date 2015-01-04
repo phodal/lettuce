@@ -17,7 +17,7 @@
 <script>
     var L = new lettuce();
     L.Router.config({mode: 'history'});
-    L.Router.navigate();
+//    L.Router.navigate();
 
     L.Router
         .add(/#about/, function () {
@@ -31,7 +31,7 @@
         })
         .check('/products/12/edit/22').listen();
 
-    L.Router.navigate('/#about');
+//    L.Router.navigate('/#about');
 </script>
 </body>
 </html>

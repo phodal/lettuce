@@ -137,37 +137,7 @@ Lettuce.prototype.Class = Class;
 
 
 var Template = function(){
-    var cache = {};
 
-    this.tmpl = function tmpl(str, data){
-        // Figure out if we're getting a template, or if we need to
-        // load the template - and be sure to cache the result.
-        var fn = !/\W/.test(str) ?
-            cache[str] = cache[str] ||
-            tmpl(document.getElementById(str).innerHTML) :
-
-            // Generate a reusable function that will serve as a template
-            // generator (and which will be cached).
-            new Function("obj",
-                "var p=[],print=function(){p.push.apply(p,arguments);};" +
-
-                    // Introduce the data as local variables using with(){}
-                "with(obj){p.push('" +
-
-                    // Convert the template into pure JavaScript
-                str
-                    .replace(/[\r\t\n]/g, " ")
-                    .split("<%").join("\t")
-                    .replace(/((^|%>)[^\t]*)'/g, "$1\r")
-                    .replace(/\t=(.*?)%>/g, "',$1,'")
-                    .split("\t").join("');")
-                    .split("%>").join("p.push('")
-                    .split("\r").join("\\'")
-                + "');}return p.join('');");
-
-        // Provide some basic currying to the user
-        return data ? fn( data ) : fn;
-    };
 };
 
 Lettuce.prototype.Template = Template;
@@ -179,8 +149,7 @@ var Router = {
     mode: null,
     root: '/',
     config: function(options) {
-        this.mode = options && options.mode && options.mode == 'history'
-        && !!(history.pushState) ? 'history' : 'hash';
+        this.mode = options && options.mode && options.mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
         this.root = options && options.root ? '/' + this.clearSlashes(options.root) + '/' : '/';
         return this;
     },
@@ -208,7 +177,7 @@ var Router = {
         return this;
     },
     remove: function(param) {
-        for(var i=0, r; i<this.routes.length, r = this.routes[i]; i++) {
+        for(var i=0, r = this.routes[i]; i<this.routes.length; i++) {
             if(r.handler === param || r.re.toString() === param.toString()) {
                 this.routes.splice(i, 1);
                 return this;
