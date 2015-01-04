@@ -24,33 +24,21 @@
     <script src="./../dist/lettuce.js"></script>
 
     <script>
-        function late(n) {
-            var L = new lettuce();
-            var p = new L.Promise();
-            setTimeout(function() {
-                p.done(null, n);
-            }, n);
-            return p;
-        }
+        var L = new lettuce();
+        var Route = new L.Router();
+        Route('/', 'home', function () {});
+        Route('/page1', 'template1', function () {
+            this.greeting = 'Hello world!';
+            this.moreText = 'Loading...';
 
-        late(100).then(
-            function(err, n) {
-                return late(n + 200);
-            }
-        ).then(
-            function(err, n) {
-                return late(n + 300);
-            }
-        ).then(
-            function(err, n) {
-                return late(n + 400);
-            }
-        ).then(
-            function(err, n) {
-                console.log(n);
-            }
-        );
-
+            // Simulating an Ajax call which take 0.5 s
+            setTimeout(function () {
+                this.moreText = 'Bacon ipsum...';
+            }.bind(this), 500);
+        });
+        Route('/page2', 'template2', function () {
+            this.heading = 'I\'m page two!';
+        });
     </script>
   </body>
 </html>

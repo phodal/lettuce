@@ -8,7 +8,6 @@ Lettuce.isObject = function (obj) {
 
 
 Lettuce.extend = function (obj) {
-    console.log(obj);
     if (!Lettuce.isObject(obj)) {
         return obj;
     }
