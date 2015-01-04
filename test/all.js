@@ -5,9 +5,8 @@ QUnit.test("test for promise then", function (assert) {
     var done2 = assert.async();
 
     function late(n) {
-        console.log(n);
         var L = new lettuce();
-        var p = new L.promise.Promise();
+        var p = new L.Promise();
         return p;
     }
 

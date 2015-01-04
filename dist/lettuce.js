@@ -90,8 +90,12 @@ function chain (funcs, args) {
     return p;
 }
 
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype, Promise);
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype.Promise, chain);
+var promise = {
+    Promise: Promise,
+    chain: chain
+};
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
 
 
 /**
