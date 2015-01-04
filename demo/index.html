@@ -8,6 +8,7 @@
 <body>
 <h1>lettuce demo</h1>
 
+<div id="results"></div>
 <p>See the <a href="http://phodal.github.io/lettuce">project homepage</a>.
 <p>Check out the <a href="https://github.com/phodal/lettuce">project repo</a>.
 <p>Copyright 999 Fengda Huang</p>
@@ -17,7 +18,6 @@
 <script>
     var L = new lettuce();
     L.Router.config({mode: 'history'});
-//    L.Router.navigate();
 
     L.Router
         .add(/#about/, function () {
@@ -31,7 +31,25 @@
         })
         .check('/products/12/edit/22').listen();
 
-//    L.Router.navigate('/#about');
+    var data = {
+        "title": "JavaScript Templates",
+        "license": {
+            "name": "MIT license",
+            "url": "http://www.opensource.org/licenses/MIT"
+        },
+        "features": [
+            "lightweight & fast",
+            "powerful",
+            "zero dependencies"
+        ]
+    };
+
+    var data = {
+        "title": "JavaScript Templates"
+    };
+
+    var result = L.tmpl("<h3>{%=o.title%}</h3>", data);
+    console.log(result);
 </script>
 </body>
 </html>

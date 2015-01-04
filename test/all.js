@@ -30,3 +30,14 @@ QUnit.test("test for router", function (assert) {
 
     equal("/#about/", check["routes"][0]["re"])
 });
+
+QUnit.test("test for template", function (assert) {
+    var L = new lettuce();
+    var data = {
+        "title": "JavaScript Templates"
+    };
+
+    var result = L.tmpl("<h3>{%=o.title%}</h3>", data);
+
+    equal("<h3>JavaScript Templates</h3>", result)
+});
