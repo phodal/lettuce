@@ -14,7 +14,6 @@ Lettuce.extend = function (obj) {
     var source, prop;
     for (var i = 1, length = arguments.length; i < length; i++) {
         source = arguments[i];
-        console.log(source);
         for (prop in source) {
             if (hasOwnProperty.call(source, prop)) {
                 obj[prop] = source[prop];

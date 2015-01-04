@@ -28,7 +28,6 @@ Lettuce.extend = function (obj) {
     var source, prop;
     for (var i = 1, length = arguments.length; i < length; i++) {
         source = arguments[i];
-        console.log(source);
         for (prop in source) {
             if (hasOwnProperty.call(source, prop)) {
                 obj[prop] = source[prop];
@@ -174,61 +173,98 @@ var Template = function(){
 Lettuce.prototype.Template = Template;
 
 
-var routes = {};
-// The route registering function:
-function route (path, templateId, controller) {
-    // Allow route(path, controller) for template less routes:
-    if (typeof templateId === 'function') {
-        controller = templateId;
-        templateId = null;
-    }
-    routes[path] = {templateId: templateId, controller: controller};
-}
-
-var el = null, current = null;
-function router () {
-    // Current route url (getting rid of '#' in hash as well):
-    var url = location.hash.slice(1) || '/';
-    // Get route by url:
-    var route = routes[url];
-    // Is it a route without template?
-    if (route && !route.templateId) {
-        // Just initiate controller:
-        return route.controller ? new route.controller : null;
-    }
-    // Lazy load view element:
-    el = el || document.getElementById('view');
-    // Clear existing observer:
-    if (current) {
-        Object.unobserve(current.controller, current.render);
-        current = null;
-    }
-    // Do we have both a view and a route?
-    if (el && route && route.controller) {
-        // Set current route information:
-        current = {
-            controller: new route.controller,
-            template: tmpl(route.templateId),
-            render: function () {
-                // Render route template with John Resig's template engine:
-                el.innerHTML = this.template(this.controller);
+// http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url
+var Router = {
+    routes: [],
+    mode: null,
+    root: '/',
+    config: function(options) {
+        this.mode = options && options.mode && options.mode == 'history'
+        && !!(history.pushState) ? 'history' : 'hash';
+        this.root = options && options.root ? '/' + this.clearSlashes(options.root) + '/' : '/';
+        return this;
+    },
+    getFragment: function() {
+        var fragment = '';
+        if(this.mode === 'history') {
+            fragment = this.clearSlashes(decodeURI(location.pathname + location.search));
+            fragment = fragment.replace(/\?(.*)$/, '');
+            fragment = this.root != '/' ? fragment.replace(this.root, '') : fragment;
+        } else {
+            var match = window.location.href.match(/#(.*)$/);
+            fragment = match ? match[1] : '';
+        }
+        return this.clearSlashes(fragment);
+    },
+    clearSlashes: function(path) {
+        return path.toString().replace(/\/$/, '').replace(/^\//, '');
+    },
+    add: function(re, handler) {
+        if(typeof re == 'function') {
+            handler = re;
+            re = '';
+        }
+        this.routes.push({ re: re, handler: handler});
+        return this;
+    },
+    remove: function(param) {
+        for(var i=0, r; i<this.routes.length, r = this.routes[i]; i++) {
+            if(r.handler === param || r.re.toString() === param.toString()) {
+                this.routes.splice(i, 1);
+                return this;
+            }
+        }
+        return this;
+    },
+    flush: function() {
+        this.routes = [];
+        this.mode = null;
+        this.root = '/';
+        return this;
+    },
+    check: function(f) {
+        var fragment = f || this.getFragment();
+        for(var i=0; i<this.routes.length; i++) {
+            var match = fragment.match(this.routes[i].re);
+            if(match) {
+                match.shift();
+                this.routes[i].handler.apply({}, match);
+                return this;
+            }
+        }
+        return this;
+    },
+    listen: function() {
+        var self = this;
+        var current = self.getFragment();
+        var fn = function() {
+            if(current !== self.getFragment()) {
+                current = self.getFragment();
+                self.check(current);
             }
         };
-        // Render directly:
-        current.render();
-        // And observe for changes:
-        Object.observe(current.controller, current.render.bind(current));
+        clearInterval(this.interval);
+        this.interval = setInterval(fn, 50);
+        return this;
+    },
+    navigate: function(path) {
+        path = path ? path : '';
+        if(this.mode === 'history') {
+            history.pushState(null, null, this.root + this.clearSlashes(path));
+        } else {
+            window.location.href.match(/#(.*)$/);
+            window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
+        }
+        return this;
     }
-}
-// Listen on hash change:
-window.addEventListener('hashchange', router);
-// Listen on page load:
-window.addEventListener('load', router);
-// Expose the route register function:
-//this.route = route;
+};
 
+var router = {
+    Router: Router,
+    chain: chain
+};
 
-Lettuce.prototype.Router = route;
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, router);
 
 
 }(this));

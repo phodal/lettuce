@@ -18,3 +18,15 @@ QUnit.test("test for promise then", function (assert) {
         done2()
     )
 });
+
+QUnit.test("test for router", function (assert) {
+    var L = new lettuce();
+    L.Router.config({mode: 'history'});
+
+    var check = L.Router
+        .add(/#about/, function () {
+        })
+        .check('/products/12/edit/22').listen();
+
+    equal("/#about/", check["routes"][0]["re"])
+});

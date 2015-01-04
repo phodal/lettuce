@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>lettuce demo</title>
-    <link rel="stylesheet" href="./assets/normalize.css" />
-    <link rel="stylesheet" href="./assets/main.css" />
-    <style>
-      /* begin demo embedded styles */
+    <link rel="stylesheet" href="./assets/normalize.css"/>
+    <link rel="stylesheet" href="./assets/main.css"/>
+</head>
+<body>
+<h1>lettuce demo</h1>
 
-      /* end demo embedded styles */
-    </style>
-  </head>
-  <body>
-    <h1>lettuce demo</h1>
+<p>See the <a href="http://phodal.github.io/lettuce">project homepage</a>.
+<p>Check out the <a href="https://github.com/phodal/lettuce">project repo</a>.
+<p>Copyright 999 Fengda Huang</p>
 
-    <!-- begin demo markup -->
+<script src="./../dist/lettuce.js"></script>
 
-    <!-- end demo markup -->
+<script>
+    var L = new lettuce();
+    L.Router.config({mode: 'history'});
+    L.Router.navigate();
 
-    <p>See the <a href="http://phodal.github.io/lettuce">project homepage</a>.
-    <p>Check out the <a href="https://github.com/phodal/lettuce">project repo</a>.
-    <p>Copyright 999 Fengda Huang</p>
+    L.Router
+        .add(/#about/, function () {
+            console.log('about');
+        })
+        .add(/products\/(.*)\/edit\/(.*)/, function () {
+            console.log('products', arguments);
+        })
+        .add(function () {
+            console.log('default');
+        })
+        .check('/products/12/edit/22').listen();
 
-    <script src="./../dist/lettuce.js"></script>
-
-    <script>
-        var L = new lettuce();
-        var Route = new L.Router();
-        Route('/', 'home', function () {});
-        Route('/page1', 'template1', function () {
-            this.greeting = 'Hello world!';
-            this.moreText = 'Loading...';
-
-            // Simulating an Ajax call which take 0.5 s
-            setTimeout(function () {
-                this.moreText = 'Bacon ipsum...';
-            }.bind(this), 500);
-        });
-        Route('/page2', 'template2', function () {
-            this.heading = 'I\'m page two!';
-        });
-    </script>
-  </body>
+    L.Router.navigate('/#about');
+</script>
+</body>
 </html>
