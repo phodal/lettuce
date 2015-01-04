@@ -260,8 +260,7 @@ var Router = {
 };
 
 var router = {
-    Router: Router,
-    chain: chain
+    Router: Router
 };
 
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, router);
