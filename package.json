@@ -16,6 +16,9 @@
         "mvvm",
         "mvc"
     ],
+    "scripts": {
+        "test": "grunt test"
+    },
     "author": "Phodal Huang",
     "license": "MIT",
     "readmeFilename": "README.md",
