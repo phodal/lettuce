@@ -1,5 +1,15 @@
 # Lettuce
 
+[![Build Status](https://api.travis-ci.org/phodal/lettuce.png)](https://travis-ci.org/phodal/lettuce)
+[![Version](http://img.shields.io/npm/v/lettuce.svg)](http://http://img.shields.io/npm/v/lettuce.svg)
+[![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
+[![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
+
+
+[![NPM](https://nodei.co/npm/lettuce.png)](https://nodei.co/npm/lettuce/)
+
+[![NPM](https://nodei.co/npm-dl/lettuce.png)](https://nodei.co/npm/lettuce/)
+
 Mobile Framework for Romantic
 
 > Coming soon
