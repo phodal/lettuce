@@ -5,12 +5,22 @@
 [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
 [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
 
-
-[![NPM](https://nodei.co/npm/lettuce.png)](https://nodei.co/npm/lettuce/)
-
-[![NPM](https://nodei.co/npm-dl/lettuce.png)](https://nodei.co/npm/lettuce/)
-
 Mobile Framework for Romantic
+
+##进度
+
+###Done
+
+- Template
+- Router
+- Ajax
+
+- Class
+- Promise 
+
+###On Going
+
+- Model
 
 > Coming soon
 
