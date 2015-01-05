@@ -16,7 +16,15 @@ QUnit.test("test for promise then", function (assert) {
     ).then(
         assert.ok(true, "test promise then 2"),
         done2()
-    )
+    ).done();
+});
+
+QUnit.test("test for Create Class", function (assert) {
+    var L = new lettuce();
+    var zero = function(){};
+    var sub = new L.Class(zero);
+
+    equal(sub.class, L.Class);
 });
 
 QUnit.test("test for router", function (assert) {
