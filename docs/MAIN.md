@@ -24,17 +24,12 @@ example
 Example
 
     var L = new lettuce();
-    L.Router.config({mode: 'history'});
-
+    
     var check = L.Router
-        .add(/#about/, function () {
-        })
-        .add({}, function () {
-        })
-        .add(/#remove/, function () {
-        })
-        .remove(/#remove/)
-        .check('/products/12/edit/22').listen();
+                .add(/#about/,log)
+                .add(/#what/, log)
+                .add(/#why/, log)
+                .load();;
 
 ##Promise
 
