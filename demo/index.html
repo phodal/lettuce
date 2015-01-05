@@ -48,8 +48,9 @@
         "title": "JavaScript Templates"
     };
 
+    L.Router.navigate("#about/");
     var result = L.tmpl("<h3>{%=o.title%}</h3>", data);
-    console.log(result);
+    document.getElementById("results").innerHTML = result;
 </script>
 </body>
 </html>

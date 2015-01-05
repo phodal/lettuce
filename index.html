@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>lettuce | Mobile Framework for Romantic</title>
-    <link rel="stylesheet" href="./demo/assets/normalize.css">
-  </head>
-  <body>
-    <h1>lettuce</h1>
-    <p>Mobile Framework for Romantic</p>
-    <p>Check out the <a href="http://phodal.github.io/lettuce/demo/index.html">project homepage</a>.</p>
-    <p>Check out the <a href="https://github.com/phodal/lettuce">source code on GitHub</a>.</p>
-    <p>Copyright 1 Fengda Huang</p>
-  </body>
+<head>
+    <title>Lettuce Framework</title>
+    <link rel="stylesheet" href="./demo/assets/normalize.css"/>
+    <link rel="stylesheet" href="./demo/assets/main.css"/>
+</head>
+<body id="what">
+<h1>Lettuce Framework</h1>
+
+<ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#what">What</a></li>
+    <li><a href="#why">Why</a></li>
+</ul>
+
+<div id="results"></div>
+<p>See the <a href="http://phodal.github.io/lettuce">project homepage</a>.
+<p>Check out the <a href="https://github.com/phodal/lettuce">project repo</a>.
+<p>Copyright 999 Fengda Huang</p>
+
+<script src="dist/lettuce.js"></script>
+
+<script>
+    var L = new lettuce();
+    L.Router.config({mode: 'history'});
+
+    var data = {
+        about:"Template",
+        what: "This about A Mobile Framework For Romantic",
+        why: "Why is a new Framework"
+    };
+
+    var about = function () {
+        var result = L.tmpl("<h3>{%=o.about%}</h3>", data);
+        document.getElementById("results").innerHTML = result;
+    };
+
+    function what() {
+        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
+        document.getElementById("results").innerHTML = result;
+    }
+
+    function why() {
+        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
+        document.getElementById("results").innerHTML = result;
+    }
+
+    L.Router
+        .add(/#about/,about)
+        .add(/#what/, what)
+        .add(/#why/, why)
+        .check("/#about/")
+        .listen("/#about/");
+
+
+    L.Router.navigate("/");
+</script>
+</body>
 </html>
