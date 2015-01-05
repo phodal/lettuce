@@ -34,9 +34,18 @@ QUnit.test("test for router", function (assert) {
     var check = L.Router
         .add(/#about/, function () {
         })
+        .add({}, function () {
+        })
+        .add(/#remove/, function () {
+        })
+        .remove(/#remove/)
         .check('/products/12/edit/22').listen();
 
-    equal("/#about/", check["routes"][0]["re"])
+    equal("/#about/", check["routes"][0]["re"]);
+
+    check.flush();
+    check.navigate("all.html");
+    notEqual(window.location.href, "file:///all.html");
 });
 
 QUnit.test("test for template", function (assert) {
@@ -45,7 +54,13 @@ QUnit.test("test for template", function (assert) {
         "title": "JavaScript Templates"
     };
 
-    var result = L.tmpl("<h3>{%=o.title%}</h3>", data);
+    var result = L.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
+    equal("<h3>JavaScript Templates</h3>\n!@#$%^&*()-=", result);
 
-    equal("<h3>JavaScript Templates</h3>", result)
+    var result = L.tmpl("\n!@#$%^&*()-=_+{}[]\|:;/.,{", data);
+    equal("\n!@#$%^&*()-=_+{}[]\|:;/.,{", result);
+
+    var header = L.tmpl.load("qunit-header");
+    equal(header, "QUnit Example");
+
 });
