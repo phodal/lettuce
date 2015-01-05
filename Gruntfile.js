@@ -3,7 +3,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
-
+        connect: {
+            server: {
+                options: {
+                    port: 8000,
+                    base: '.'
+                }
+            }
+        },
         concat: {
             options: {
                 separator: "\n\n"
@@ -40,7 +47,7 @@ module.exports = function (grunt) {
                 '--web-security': 'no',
                 coverage: {
                     disposeCollector: true,
-                    src: ['dist/*.js'],
+                    src: ['http://0.0.0.0:8000/dist/*.js'],
                     instrumentedFiles: 'temp/',
                     htmlReport: 'report/coverage',
                     lcovReport: 'report/coverage',
@@ -48,7 +55,13 @@ module.exports = function (grunt) {
                     linesThresholdPct: 74
                 }
             },
-            files: ['test/*.html']
+            all: {
+                options: {
+                    urls: [
+                        'http://0.0.0.0:8000/test/all.html'
+                    ]
+                }
+            }
         },
 
         jshint: {
@@ -76,8 +89,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-qunit-istanbul');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('test', ['jshint', 'qunit']);
-    grunt.registerTask('default', ['concat', 'jshint', 'qunit', 'uglify']);
+    grunt.registerTask('test', ['jshint','connect', 'qunit']);
+    grunt.registerTask('default', ['concat', 'jshint','connect', 'qunit', 'uglify']);
 
 };
