@@ -64,3 +64,13 @@ QUnit.test("test for template", function (assert) {
     equal(header, "QUnit Example");
 
 });
+
+QUnit.test("test for template", function (assert) {
+    assert.expect(1);
+    var done = assert.async();
+
+    lettuce.get('/bower.json',[], function(result){
+        equal(result["name"], "lettuce");
+        done();
+    })
+});

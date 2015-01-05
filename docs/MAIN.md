@@ -49,3 +49,12 @@ example
     late(100).then(
     ).then(
     ).done();
+
+##Ajax
+
+example
+
+    lettuce.get('/bower.json',[], function(result){
+        equal(result["name"], "lettuce");
+        done();
+    })
