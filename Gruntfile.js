@@ -11,6 +11,13 @@ module.exports = function (grunt) {
                 }
             }
         },
+
+        jasmine : {
+            src : 'dist/*.js',
+            options : {
+                specs : 'specs/*-spec.js'
+            }
+        },
         concat: {
             options: {
                 separator: "\n\n"
@@ -42,28 +49,6 @@ module.exports = function (grunt) {
             }
         },
 
-        qunit: {
-            options: {
-                '--web-security': 'no',
-                coverage: {
-                    disposeCollector: true,
-                    src: ['http://0.0.0.0:8000/dist/*.js'],
-                    instrumentedFiles: 'temp/',
-                    htmlReport: 'report/coverage',
-                    lcovReport: 'report/coverage',
-                    coberturaReport: 'report/',
-                    linesThresholdPct: 74
-                }
-            },
-            all: {
-                options: {
-                    urls: [
-                        'http://0.0.0.0:8000/test/all.html'
-                    ]
-                }
-            }
-        },
-
         jshint: {
             files: ['dist/lettuce.js'],
             options: {
@@ -85,13 +70,12 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-qunit-istanbul');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('test', ['jshint','connect', 'qunit']);
-    grunt.registerTask('default', ['concat', 'jshint','connect', 'qunit', 'uglify']);
+    grunt.registerTask('test', ['jshint', 'connect', 'jasmine']);
+    grunt.registerTask('default', ['concat', 'jshint', 'connect', 'jasmine', 'uglify']);
 
 };
