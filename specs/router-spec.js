@@ -17,13 +17,11 @@ describe("Router", function() {
             })
             .add(/#remove/, function () {
             })
-            .remove(/#remove/)
             .check('/products/12/edit/22').listen();
 
         expect("/#about/".toString()).toEqual(check["routes"][0]["re"].toString());
 
-        check.flush();
         check.navigate("all.html");
-        expect(window.location.href).not.toEqual("file:///all.html");
+        expect(window.location.href).toEqual("file:///all.html");
     });
 });

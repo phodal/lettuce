@@ -258,31 +258,16 @@ tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 Lettuce.prototype.tmpl = tmpl;
 
 
-// http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url
+//Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url & Backbone
 var Router = {
     routes: [],
     mode: null,
     root: '/',
-    config: function(options) {
-        this.mode = options && options.mode && options.mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
-        this.root = options && options.root ? '/' + this.clearSlashes(options.root) + '/' : '/';
-        return this;
+    hashStrip: /^#*/,
+    getFragment: function(loc) {
+        return (loc || window.location).hash.replace(this.hashStrip, '');
     },
-    getFragment: function() {
-        var fragment = '';
-        if(this.mode === 'history') {
-            fragment = this.clearSlashes(decodeURI(location.pathname + location.search));
-            fragment = fragment.replace(/\?(.*)$/, '');
-            fragment = this.root != '/' ? fragment.replace(this.root, '') : fragment;
-        } else {
-            var match = window.location.href.match(/#(.*)$/);
-            fragment = match ? match[1] : '';
-        }
-        return this.clearSlashes(fragment);
-    },
-    clearSlashes: function(path) {
-        return path.toString().replace(/\/$/, '').replace(/^\//, '');
-    },
+
     add: function(re, handler) {
         if(typeof re == 'function') {
             handler = re;
@@ -300,31 +285,28 @@ var Router = {
         }
         return this;
     },
-    flush: function() {
-        this.routes = [];
-        this.mode = null;
-        this.root = '/';
-        return this;
-    },
-    check: function(f) {
-        var fragment = f || this.getFragment();
-        for(var i=0; i<this.routes.length; i++) {
-            var match = fragment.match(this.routes[i].re);
-            if(match) {
+    check: function (current, self) {
+        var fragment = current || self.getFragment();
+        for (var i = 0; i < self.routes.length; i++) {
+            var newFragment = "#" + fragment;
+            var match = newFragment.match(self.routes[i].re);
+            console.log(match, newFragment);
+            if (match) {
                 match.shift();
-                this.routes[i].handler.apply({}, match);
-                return this;
+                self.routes[i].handler.apply({}, match);
             }
         }
-        return this;
     },
-    listen: function() {
+
+    load: function() {
         var self = this;
         var current = self.getFragment();
         var fn = function() {
             if(current !== self.getFragment()) {
                 current = self.getFragment();
-                self.check(current);
+                //self.check(current);
+            } else {
+                self.check(current, self);
             }
         };
         clearInterval(this.interval);
@@ -333,12 +315,8 @@ var Router = {
     },
     navigate: function(path) {
         path = path ? path : '';
-        if(this.mode === 'history') {
-            history.pushState(null, null, this.root + this.clearSlashes(path));
-        } else {
-            window.location.href.match(/#(.*)$/);
-            window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
-        }
+        window.location.href.match(/#(.*)$/);
+        window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
         return this;
     }
 };

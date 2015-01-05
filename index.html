@@ -23,7 +23,6 @@
 
 <script>
     var L = new lettuce();
-    L.Router.config({mode: 'history'});
 
     var data = {
         about:"Template",
@@ -42,7 +41,7 @@
     }
 
     function why() {
-        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
+        var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
         document.getElementById("results").innerHTML = result;
     }
 
@@ -50,11 +49,8 @@
         .add(/#about/,about)
         .add(/#what/, what)
         .add(/#why/, why)
-        .check("/#about/")
-        .listen("/#about/");
+        .load();
 
-
-    L.Router.navigate("/");
 </script>
 </body>
 </html>
