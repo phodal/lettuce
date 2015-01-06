@@ -16,21 +16,11 @@ var Router = {
         this.routes.push({ re: re, handler: handler});
         return this;
     },
-    remove: function(param) {
-        for(var i=0, r = this.routes[i]; i<this.routes.length; i++) {
-            if(r.handler === param || r.re.toString() === param.toString()) {
-                this.routes.splice(i, 1);
-                return this;
-            }
-        }
-        return this;
-    },
     check: function (current, self) {
         var fragment = current || self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
             var match = newFragment.match(self.routes[i].re);
-            console.log(match, newFragment);
             if (match) {
                 match.shift();
                 self.routes[i].handler.apply({}, match);
