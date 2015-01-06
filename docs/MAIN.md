@@ -49,7 +49,7 @@ example
 
 example
 
-    lettuce.get('/bower.json',[], function(result){
+    lettuce.get('/bower.json', function(result){
         equal(result["name"], "lettuce");
         done();
     })

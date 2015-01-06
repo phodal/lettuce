@@ -1,39 +1,18 @@
-Lettuce.get = function(url, params, callback) {
-    Lettuce.send(url, 'GET', params, callback);
+Lettuce.get = function (url, callback) {
+    Lettuce.send(url, 'GET', callback);
 };
 
-Lettuce.post = function(url, params, callback) {
-    Lettuce.send(url, 'POST', params, callback);
+Lettuce.post = function (url, params, callback) {
+    Lettuce.send(url, 'POST', callback);
 };
 
-Lettuce.send = function(url, method, params, callback) {
+Lettuce.send = function (url, method, callback) {
     var request = new XMLHttpRequest();
-    request.open(method, url, true);
-    request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-            var data = request.responseText;
-            try {
-                data = JSON.parse(data);
-            } catch (exc) {
-            }
-            if (callback) {
-                callback(data);
-            }
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && (request.status === 200 || request.status === 0)) {
+            callback(request.responseText);
         }
     };
-
-    var body;
-    if (params) {
-        var bodies = [];
-        for (var name in params) {
-            bodies.push(name + '=' + encodeURIComponent(params[name]));
-        }
-
-        body = bodies.join('&');
-        if (body.length) {
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        }
-    }
-
-    request.send(body);
+    request.open(method, url, true);
+    request.send(null);
 };
