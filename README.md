@@ -14,7 +14,6 @@ Mobile Framework for Romantic
 - Template
 - Router
 - Ajax
-
 - Class
 - Promise 
 

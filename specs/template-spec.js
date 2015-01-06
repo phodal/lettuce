@@ -19,22 +19,21 @@ describe("Template", function() {
         expect("\n!@#$%^&*()-=_+{}[]\|:;/.,{").toEqual(result);
     });
     //
-    //it("should be call innerHTml", function() {
-    //
-    //    var document = {
-    //        getElementById: function(a) {
-    //            return this;
-    //        },
-    //
-    //        innerHTML : function (){
-    //            return this;
-    //        }
-    //    };
-    //
-    //    console.log(document.getElementById().innerHTML());
-    //    spyOn(document, "getElementById");
-    //    spyOn(document, "innerHTML").and.returnValue("");
-    //    var header = L.tmpl.load("head");
-    //    expect(document.getElementById).toHaveBeenCalled();
-    //});
+    it("should be call innerHTml", function() {
+
+        var document = {
+            getElementById: function(a) {
+                return this;
+            },
+
+            innerHTML : function (){
+                return this;
+            }
+        };
+
+     //   spyOn(document, "getElementById");
+     //   spyOn(document, "innerHTML").and.returnValue("");
+     //   var header = L.tmpl.load("head");
+     //   expect(document.getElementById).toHaveBeenCalled();
+    });
 });

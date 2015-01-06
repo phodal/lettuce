@@ -240,7 +240,7 @@ var Router = {
     },
 
     add: function(re, handler) {
-        if(typeof re == 'function') {
+        if(typeof re === 'function') {
             handler = re;
             re = '';
         }

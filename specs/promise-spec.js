@@ -24,8 +24,6 @@ describe("Promise", function() {
             }
         ).then(
             function(err, n){
-                //equal(n).to(600);
-                //done();
             }
         ).done();
     });

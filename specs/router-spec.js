@@ -45,16 +45,22 @@ describe("Router", function() {
     });
 
     it("should be able to call router check", function() {
-        var log = function(result){
-        };
+        var log = jasmine.createSpy('log');
+        var somefunc = jasmine.createSpy('somefunc');
+        var some = function (){};
 
         L.Router.navigate("/");
         var url = window.location.href;
         var router = L.Router
             .add(/#about/,log)
             .add(/#what/, log)
+            .add(some, somefunc)
             .load();
 
         router.check('about', router);
+        expect(log).toHaveBeenCalled();
+
+        router.check('sp,e', router);
+        expect(somefunc).not.toHaveBeenCalled();
     });
 });
