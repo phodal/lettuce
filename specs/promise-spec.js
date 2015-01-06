@@ -27,7 +27,7 @@ describe("Promise", function() {
                 //equal(n).to(600);
                 //done();
             }
-        );
+        ).done();
     });
 
 });

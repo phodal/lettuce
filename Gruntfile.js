@@ -13,9 +13,20 @@ module.exports = function (grunt) {
         },
 
         jasmine : {
-            src : 'dist/*.js',
+            src : 'dist/lettuce.js',
             options : {
-                specs : 'specs/*-spec.js'
+                specs : 'specs/*-spec.js',
+                template: require('grunt-template-jasmine-istanbul'),
+                templateOptions: {
+                    coverage: 'coverage/coverage.json',
+                    report: 'coverage',
+                    thresholds: {
+                        lines: 65
+                        //statements: 75,
+                        //branches: 75,
+                        //functions: 90
+                    }
+                }
             }
         },
         concat: {
