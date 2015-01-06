@@ -26,16 +26,35 @@ describe("Router", function() {
 
     it("should be able to different router in page", function() {
         var log = function(result){
-            console.log(result);
         };
 
-        var check = L.Router
+        L.Router.navigate("/");
+        var url = window.location.href;
+        var router = L.Router
             .add(/#about/,log)
             .add(/#what/, log)
             .load();
 
-        check.navigate("#about/");
-        expect(window.location.href).not.toEqual("file:///all.html");
+        router.navigate("what/");
+
+        router.navigate("about/");
+        expect(window.location.href).toEqual(url.replace("#", "#about"));
+
+        router.navigate("why/");
+        expect(window.location.href).toEqual(url.replace("#", "#why"));
     });
 
+    it("should be able to call router check", function() {
+        var log = function(result){
+        };
+
+        L.Router.navigate("/");
+        var url = window.location.href;
+        var router = L.Router
+            .add(/#about/,log)
+            .add(/#what/, log)
+            .load();
+
+        router.check('about', router);
+    });
 });
