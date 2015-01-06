@@ -33,24 +33,8 @@ Promise.prototype.done = function() {
     this._callbacks = [];
 };
 
-function chain (funcs, args) {
-    var p = new Promise();
-    if (funcs.length === 0) {
-        p.done.apply(p, args);
-    } else {
-        funcs[0].apply(null, args).then(function() {
-            funcs.splice(0, 1);
-            chain(funcs, arguments).then(function() {
-                p.done.apply(p, arguments);
-            });
-        });
-    }
-    return p;
-}
-
 var promise = {
-    Promise: Promise,
-    chain: chain
+    Promise: Promise
 };
 
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
