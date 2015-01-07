@@ -1,6 +1,6 @@
 {
     "name": "lettuce",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Mobile Framework for Romantic",
     "main": "index.js",
     "scripts": {
