@@ -15,6 +15,7 @@ module.exports = function (grunt) {
         jasmine : {
             src : 'dist/lettuce.js',
             options : {
+                host: "http://0.0.0.0:8000",
                 specs : 'specs/*-spec.js',
                 template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {

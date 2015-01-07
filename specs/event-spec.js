@@ -34,4 +34,14 @@ describe("Event", function() {
         expect(called).toEqual(0);
     });
 
+    it('should no return when off or trigger something no exists',  function () {
+        var called = 0,
+            f1 = function () { called++ };
+
+        L.Event.on('ping', f1);
+        L.Event.off('something');
+        L.Event.trigger('something');
+        expect(called).toEqual(0);
+    });
+
 });

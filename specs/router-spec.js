@@ -5,6 +5,7 @@ describe("Router", function() {
 
     beforeEach(function() {
         L = new lettuce();
+        jasmine.clock().install();
     });
 
     it("should be able to different router in page", function() {
@@ -57,9 +58,12 @@ describe("Router", function() {
             .add(some, somefunc)
             .load();
 
+        jasmine.clock().tick(101);
+
         router.check('about', router);
         expect(log).toHaveBeenCalled();
 
+        jasmine.clock().tick(101);
         router.check('sp,e', router);
         expect(somefunc).not.toHaveBeenCalled();
     });
