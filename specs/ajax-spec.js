@@ -1,13 +1,13 @@
 'use strict';
 
-describe("Template", function() {
+describe("Ajax", function() {
     var L;
 
     beforeEach(function() {
         L = new lettuce();
     });
 
-    it("should be able render page", function(done) {
+    it("should be get JSON from bower.json", function(done) {
         lettuce.get('http://0.0.0.0:8000/bower.json', function(result){
             //expect(result["name"]).toEqual("lettuce");
         })
