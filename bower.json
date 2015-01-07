@@ -4,11 +4,10 @@
     "authors": [
         "Fengda HUANG <h@phodal.com>"
     ],
-    "description": "A Mobile JavaScript Framework",
-    "main": "index.js",
+    "description": "Mobile Framework For Romantic",
+    "main": "dist/lettuce.js",
     "moduleType": [
-        "amd",
-        "node"
+        "amd"
     ],
     "keywords": [
         "lettuce",
@@ -23,7 +22,9 @@
         "**/.*",
         "node_modules",
         "bower_components",
-        "test",
-        "tests"
+        "docs",
+        "specs",
+        "index.html",
+        "CNAME"
     ]
 }
