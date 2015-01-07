@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <title>Lettuce Framework</title>
     <meta name="keywords" content="lettuce,lettuce.js,mobile cms,mobile framework">
     <meta name="description" content="A Mobile Framework for Romantics. Create wheel for fun">
@@ -9,26 +10,46 @@
     <link rel="stylesheet" href="./dist/lettuce.css"/>
 </head>
 <body>
-<header>
-    <h1>Lettuce Framework</h1>
-</header>
-
-<nav class="menu">
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#what">What</a></li>
-        <li><a href="#why">Why</a></li>
-    </ul>
-</nav>
 
 <div class="content">
-    <img src="docs/lettuce.png" title="Lettuce Framework"/>
-    <div id="results"></div>
-    <p>See the <a href="http://phodal.github.io/lettuce">project homepage</a>.
-    <p>Check out the <a href="http://lettuce.phodal.com/">project repo</a>.
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Lettuce</a></li>
+            <li><a href="http://lettuce.phodal.com/">Home</a></li>
+            <li><a href="https://github.com/phodal/lettuce">Github</a></li>
+        </ul>
+    </nav>
+
+    <div class="lettuce">
+        <header>
+            <h1>Lettuce Framework</h1>
+
+            <h2>A Framework For Romantic.写了很多代码,用的都是框架，最后不知道收获什么了?</h2>
+        </header>
+        <img class="logo" src="docs/lettuce.png" title="Lettuce Framework"/>
+    </div>
+
+    <div class="about">
+        <ul class="nav">
+            <li><a href="/#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#what">What</a></li>
+            <li><a href="#why">Why</a></li>
+        </ul>
+
+        <div id="results">
+            Inspired by:
+            <ul>
+                <li><a href="">Backbone</a></li>
+                <li><a href="">JavaScript-Templates</a></li>
+                <li><a href="">Router</a></li>
+                <li><a href="">jQuery</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 <footer>
-    <p>Copyright 999 Fengda Huang</p>
+    <p>Copyright 999 <a href="http://www.phodal.com" title="Fengda Huang">Phodal Huang</a> & ?(will be you)</p>
 </footer>
 <script src="dist/lettuce.js"></script>
 
@@ -36,9 +57,9 @@
     var L = new lettuce();
 
     var data = {
-        about: "Template",
-        what: "This about A Mobile Framework For Romantic",
-        why: "Why is a new Framework"
+        about: "This about A Mobile Framework For Romantic",
+        what: "A Framework",
+        why: "Why is a new Framework."
     };
 
     var about = function () {
@@ -56,13 +77,18 @@
         document.getElementById("results").innerHTML = result;
     }
 
+    function home(){
+        L.Router.navigate("/");
+    }
+
     L.Router
+        .add(/#/, home)
         .add(/#about/, about)
         .add(/#what/, what)
         .add(/#why/, why)
         .load();
 
-    L.Event.on('tick', function(results){
+    L.Event.on('tick', function (results) {
         console.log(results);
     });
     console.log(L.Router.routes)
