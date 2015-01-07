@@ -77,12 +77,7 @@
         document.getElementById("results").innerHTML = result;
     }
 
-    function home(){
-        L.Router.navigate("/");
-    }
-
     L.Router
-        .add(/#/, home)
         .add(/#about/, about)
         .add(/#what/, what)
         .add(/#why/, why)
