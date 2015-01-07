@@ -20,20 +20,20 @@ describe("Template", function() {
     });
     //
     it("should be call innerHTml", function() {
+        var getElementById = {
+            innerHTML:""
+        };
+        //var dummyElement = document.createElement('div');
+        getElementById.innerHTML = jasmine.createSpy('HTML Element');
+        ////document.getElementById.innerHTML = dummyElement ;
 
+        var document = jasmine.createSpy('spy');
         var document = {
-            getElementById: function(a) {
-                return this;
-            },
-
-            innerHTML : function (){
-                return this;
-            }
+            getElementById: getElementById.innerHTML
         };
 
-     //   spyOn(document, "getElementById");
-     //   spyOn(document, "innerHTML").and.returnValue("");
-     //   var header = L.tmpl.load("head");
-     //   expect(document.getElementById).toHaveBeenCalled();
+        document.getElementById("head");
+        //L.tmpl.load("head");
+        expect(document.getElementById).toHaveBeenCalledWith("head");
     });
 });
