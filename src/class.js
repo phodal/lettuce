@@ -8,36 +8,33 @@
  * Inspired by https://github.com/munro/self, https://github.com/jneen/pjs
  */
 
-Lettuce.prototype.Class = (function (prototype, ownProperty, undefined) {
-	var lettuceClass = function Class(_superclass, definition) {
-        if (definition === undefined) {
-            definition = _superclass;
-            _superclass = Object;
-        }
+Lettuce.prototype.Class = (function (prototype, ownProperty) {
 
-        function C() {
-            var self = this instanceof C ? this : new Bare();
+	var lettuceClass = function Klass(_superclass, definition) {
+
+        function Class() {
+            var self = this instanceof Class ? this : new Basic();
             self.init.apply(self, arguments);
             return self;
         }
 
-        function Bare() {
+        function Basic() {
         }
 
-        C.Bare = Bare;
+        Class.Basic = Basic;
 
-        var _super = Bare[prototype] = _superclass[prototype];
-        var proto = Bare[prototype] = C[prototype] = C.p = new Bare();
+        var _super = Basic[prototype] = _superclass[prototype];
+        var proto = Basic[prototype] = Class[prototype] = new Basic();
 
-        proto.constructor = C;
+        proto.constructor = Class;
 
-        C.extend = function (def) {
-            return new Class(C, def);
+        Class.extend = function (def) {
+            return new Klass(Class, def);
         };
 
-        var open = (C.open = function (def) {
+        var open = (Class.open = function (def) {
             if (typeof def === 'function') {
-                def = def.call(C, proto, _super, C, _superclass);
+                def = def.call(Class, proto, _super, Class, _superclass);
             }
 
             if (typeof def === 'object') {
@@ -52,10 +49,12 @@ Lettuce.prototype.Class = (function (prototype, ownProperty, undefined) {
                 proto.init = _superclass;
             }
 
-            return C;
+            return Class;
         });
+
         return (open)(definition);
     };
+
     return lettuceClass;
 
 })('prototype', ({}).hasOwnProperty);

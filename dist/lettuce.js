@@ -90,26 +90,22 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
  * Inspired by https://github.com/munro/self, https://github.com/jneen/pjs
  */
 
-Lettuce.prototype.Class = (function (prototype, ownProperty, undefined) {
-	var lettuceClass = function Class(_superclass, definition) {
-        if (definition === undefined) {
-            definition = _superclass;
-            _superclass = Object;
-        }
+Lettuce.prototype.Class = (function (prototype, ownProperty) {
 
+	var lettuceClass = function Class(_superclass, definition) {
         function C() {
-            var self = this instanceof C ? this : new Bare();
+            var self = this instanceof C ? this : new Basic();
             self.init.apply(self, arguments);
             return self;
         }
 
-        function Bare() {
+        function Basic() {
         }
 
-        C.Bare = Bare;
+        C.Basic = Basic;
 
-        var _super = Bare[prototype] = _superclass[prototype];
-        var proto = Bare[prototype] = C[prototype] = C.p = new Bare();
+        var _super = Basic[prototype] = _superclass[prototype];
+        var proto = Basic[prototype] = C[prototype] = C.p = new Basic();
 
         proto.constructor = C;
 
@@ -117,7 +113,7 @@ Lettuce.prototype.Class = (function (prototype, ownProperty, undefined) {
             return new Class(C, def);
         };
 
-        var open = (C.open = function (def) {
+        var open = function (def) {
             if (typeof def === 'function') {
                 def = def.call(C, proto, _super, C, _superclass);
             }
@@ -135,9 +131,11 @@ Lettuce.prototype.Class = (function (prototype, ownProperty, undefined) {
             }
 
             return C;
-        });
+        };
+
         return (open)(definition);
     };
+
     return lettuceClass;
 
 })('prototype', ({}).hasOwnProperty);
