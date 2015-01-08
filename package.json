@@ -4,7 +4,7 @@
     "description": "Mobile Framework for Romantic",
     "main": "index.js",
     "scripts": {
-        "test": "grunt test;CODECLIMATE_REPO_TOKEN=321480822fc37deb0de70a11931b4cb6a2a3cc411680e8f4569936ac8ffbb0ab codeclimate < coverage/lcov.info"
+        "test": "grunt test;"
     },
     "repository": {
         "type": "git",
