@@ -9,7 +9,6 @@
 
     var pageView = function(){};
     pageView.prototype = {
-        message:"This about A Mobile Framework For Romantic",
         init:function(){
             var result = L.tmpl("<h3>" + this.message + "</h3>", data);
             document.getElementById("results").innerHTML = result;
@@ -17,16 +16,13 @@
     };
 
     var about = new L.Class(pageView);
+    about.prototype.message = data.about;
 
-    function what() {
-        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
+    var what = new L.Class(pageView);
+    what.prototype.message = data.what;
 
-    function why() {
-        var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
+    var why = new L.Class(pageView);
+    why.prototype.message = data.why;
 
     L.Router
         .add(/#about/, about)
