@@ -10,17 +10,17 @@ Lettuce is a Small & Powerful Framework for Romantic.  Online demo [http://phoda
 ##Example
 
 1.new a instance 
-
+```
     var L = new lettuce();
-
+```
 2.define data
-
+```javascript
     var data = {
         about: "Template",
         what: "This about A Mobile Framework For Romantic",
         why: "Why is a new Framework"
     };
-
+```
 
 3.create function for router 
 
