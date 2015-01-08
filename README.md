@@ -1,3 +1,5 @@
+![Lettuce](./docs/lettuce.png)
+
 # Lettuce, Mobile Framework
 
 [![Build Status](https://api.travis-ci.org/phodal/lettuce.png)](https://travis-ci.org/phodal/lettuce)
