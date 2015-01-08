@@ -92,9 +92,10 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
 
 Lettuce.prototype.Class = (function (prototype, ownProperty) {
 
-	var lettuceClass = function Class(_superclass, definition) {
-        function C() {
-            var self = this instanceof C ? this : new Basic();
+	var lettuceClass = function Klass(_superclass, definition) {
+
+        function Class() {
+            var self = this instanceof Class ? this : new Basic();
             self.init.apply(self, arguments);
             return self;
         }
@@ -102,20 +103,20 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
         function Basic() {
         }
 
-        C.Basic = Basic;
+        Class.Basic = Basic;
 
         var _super = Basic[prototype] = _superclass[prototype];
-        var proto = Basic[prototype] = C[prototype] = C.p = new Basic();
+        var proto = Basic[prototype] = Class[prototype] = new Basic();
 
-        proto.constructor = C;
+        proto.constructor = Class;
 
-        C.extend = function (def) {
-            return new Class(C, def);
+        Class.extend = function (def) {
+            return new Klass(Class, def);
         };
 
-        var open = function (def) {
+        var open = (Class.open = function (def) {
             if (typeof def === 'function') {
-                def = def.call(C, proto, _super, C, _superclass);
+                def = def.call(Class, proto, _super, Class, _superclass);
             }
 
             if (typeof def === 'object') {
@@ -130,8 +131,8 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
                 proto.init = _superclass;
             }
 
-            return C;
-        };
+            return Class;
+        });
 
         return (open)(definition);
     };

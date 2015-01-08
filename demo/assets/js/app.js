@@ -7,10 +7,11 @@
         why: "Why is a new Framework."
     };
 
-    var pageView = function(view){
-        view.message = "This about A Mobile Framework For Romantic";
-        view.init = function(){
-            var result = L.tmpl("<h3>" + view.message + "</h3>", data);
+    var pageView = function(){};
+    pageView.prototype = {
+        message:"This about A Mobile Framework For Romantic",
+        init:function(){
+            var result = L.tmpl("<h3>" + this.message + "</h3>", data);
             document.getElementById("results").innerHTML = result;
         }
     };
