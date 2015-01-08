@@ -5,48 +5,53 @@
 [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
 [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
 
-Lettuce is a Small & Powerful Framework for Romantic.  Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
+Lettuce is a Small & Powerful Framework for Romantic.
+Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
 
 ##Example
 
-1.new a instance 
-```
-    var L = new lettuce();
+1.new a instance
+
+```javascript
+var L = new lettuce();
 ```
 2.define data
+
 ```javascript
-    var data = {
-        about: "Template",
-        what: "This about A Mobile Framework For Romantic",
-        why: "Why is a new Framework"
-    };
+var data = {
+    about: "Template",
+    what: "This about A Mobile Framework For Romantic",
+    why: "Why is a new Framework"
+};
 ```
 
-3.create function for router 
+3.create function for router
 
-    function about() {
-        var result = L.tmpl("<h3>{%=o.about%}</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    };
+```javascript
+function about() {
+    var result = L.tmpl("<h3>{%=o.about%}</h3>", data);
+    document.getElementById("results").innerHTML = result;
+};
 
-    function what() {
-        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
+function what() {
+    var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
+    document.getElementById("results").innerHTML = result;
+}
 
-    function why() {
-        var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
-
+function why() {
+    var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
+    document.getElementById("results").innerHTML = result;
+}
+```
 4.Add router
 
-    L.Router
-        .add(/#about/, about)
-        .add(/#what/, what)
-        .add(/#why/, why)
-        .load();
-
+```javascript
+L.Router
+    .add(/#about/, about)
+    .add(/#what/, what)
+    .add(/#why/, why)
+    .load();
+```
 
 ##Process
 
@@ -56,7 +61,7 @@ Lettuce is a Small & Powerful Framework for Romantic.  Online demo [http://phoda
 - Router
 - Ajax
 - Class
-- Promise 
+- Promise
 
 ###On Going
 
