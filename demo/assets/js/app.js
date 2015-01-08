@@ -22,20 +22,12 @@
         document.getElementById("results").innerHTML = result;
     }
 
-    function home() {
-        L.Router.navigate("/");
-    }
-
     L.Router
-        .add(/#/, home)
         .add(/#about/, about)
         .add(/#what/, what)
         .add(/#why/, why)
         .load();
 
-    L.Event.on('tick', function (results) {
-        console.log(results);
-    });
     console.log(L.Router.routes);
 
 }(lettuce));
