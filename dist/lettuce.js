@@ -83,10 +83,10 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
 /**
  * Lettuce Class 0.0.1
  * JavaScript Class built-in inheritance system
+ *(c) 2015, Fengda Huang - http://www.phodal.com
  *
- * MIT Licensed.
- * (c) 2015, Fengda Huang - http://www.phodal.com
  * Copyright (c) 2011, 2012 Jeanine Adkisson.
+ *  MIT Licensed.
  * Inspired by https://github.com/munro/self, https://github.com/jneen/pjs
  */
 
