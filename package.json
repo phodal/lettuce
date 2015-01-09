@@ -1,8 +1,8 @@
 {
     "name": "lettuce",
-    "version": "0.0.6",
-    "description": "Mobile Framework for Romantic",
-    "main": "index.js",
+    "version": "0.0.7",
+    "description": "生菜, Mini Mobile Framework for Romantic",
+    "main": "dist/lettuce.js",
     "scripts": {
         "test": "grunt test;"
     },
@@ -16,7 +16,10 @@
         "mvvm",
         "mvc"
     ],
-    "author": "Phodal Huang",
+    "author": [
+        "Fengda HUANG <h@phodal.com>",
+        "Song Yang <usay@outlook.com>"
+    ],
     "license": "MIT",
     "readmeFilename": "README.md",
     "dependencies": {},

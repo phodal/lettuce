@@ -2,9 +2,10 @@
     "name": "lettuce",
     "version": "0.0.6",
     "authors": [
-        "Fengda HUANG <h@phodal.com>"
+        "Fengda HUANG <h@phodal.com>",
+        "Song Yang <usay@outlook.com>"
     ],
-    "description": "Mobile Framework For Romantic",
+    "description": "生菜, Mini Mobile Framework For Romantic",
     "main": "dist/lettuce.js",
     "moduleType": [
         "amd"
@@ -23,8 +24,6 @@
         "node_modules",
         "bower_components",
         "docs",
-        "specs",
-        "index.html",
-        "CNAME"
+        "specs"
     ]
 }
