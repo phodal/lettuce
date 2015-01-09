@@ -283,8 +283,9 @@ tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 Lettuce.prototype.tmpl = tmpl;
 
 
-//var SimpleView = new Lettuce.prototype.Class(function (data) {
-//    data
+//var SimpleView = new Lettuce.prototype.Class(function (data, type) {
+//    this.data = data;
+//    this.message = type;
 //});
 
 function SimpleView (data, type){
@@ -299,7 +300,7 @@ SimpleView.prototype.init = function () {
 
 
 SimpleView.prototype.render = function () {
-    console.log("-------------");
+
 };
 
 var simpleView = {
