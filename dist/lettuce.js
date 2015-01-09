@@ -1,6 +1,6 @@
 (function(root, undefined) {
 
-  "use strict";
+  'use strict';
 
 
 var Lettuce = function() {

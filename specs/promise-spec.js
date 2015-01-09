@@ -7,7 +7,7 @@ describe("Promise", function() {
         L = new lettuce();
     });
 
-    it("should be use promise patterns", function() {
+    it("should be use promise patterns", function(done) {
         function late(n) {
             var L = new lettuce();
             var p = new L.Promise();
@@ -23,8 +23,7 @@ describe("Promise", function() {
                 return late(n + 300);
             }
         ).then(
-            function(err, n){
-            }
+            done()
         ).done();
     });
 

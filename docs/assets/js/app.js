@@ -24,7 +24,12 @@
     var why = new L.Class(pageView);
     why.prototype.message = data.why;
 
+    var home = function (){
+        L.Router.navigate("");
+    };
+
     L.Router
+        .add(/#/, home)
         .add(/#about/, about)
         .add(/#what/, what)
         .add(/#why/, why)
