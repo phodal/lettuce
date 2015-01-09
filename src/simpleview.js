@@ -13,6 +13,10 @@ SimpleView.prototype.init = function () {
 };
 
 
+SimpleView.prototype.render = function () {
+    
+};
+
 var simpleView = {
     SimpleView: SimpleView
 };

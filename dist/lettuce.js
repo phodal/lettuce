@@ -298,6 +298,10 @@ SimpleView.prototype.init = function () {
 };
 
 
+SimpleView.prototype.render = function () {
+    console.log("-------------");
+};
+
 var simpleView = {
     SimpleView: SimpleView
 };

@@ -19,9 +19,9 @@
 
     L.Router
         .add(/#/, home)
-        .add(/#about/, about)
-        .add(/#what/, what)
-        .add(/#why/, why)
+        .add(/#about/, about.render)
+        .add(/#what/, what.render)
+        .add(/#why/, why.render)
         .load();
 
     L.Event.on('tick', function (results) {
