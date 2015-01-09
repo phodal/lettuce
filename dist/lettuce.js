@@ -283,6 +283,27 @@ tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 Lettuce.prototype.tmpl = tmpl;
 
 
+//var SimpleView = new Lettuce.prototype.Class(function (data) {
+//    data
+//});
+
+function SimpleView (data, type){
+    this.data = data;
+    this.message = type;
+}
+
+SimpleView.prototype.init = function () {
+    var result = Lettuce.tmpl("<h3>" + this.message + "</h3>", this.data);
+    document.getElementById("results").innerHTML = result;
+};
+
+
+var simpleView = {
+    SimpleView: SimpleView
+};
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
+
+
 //Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url & Backbone
 var Router = {
     routes: [],

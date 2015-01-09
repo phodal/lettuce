@@ -49,6 +49,7 @@ module.exports = function (grunt) {
                     'src/ajax.js',
                     'src/event.js',
                     'src/template.js',
+                    'src/simpleview.js',
                     'src/router.js',
                     'src/_outro.js'
                 ],
