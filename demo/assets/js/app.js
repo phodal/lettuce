@@ -22,7 +22,12 @@
         document.getElementById("results").innerHTML = result;
     }
 
+    var home = function (){
+        L.Router.navigate("");
+    };
+
     L.Router
+        .add(/#/, home)
         .add(/#about/, about)
         .add(/#what/, what)
         .add(/#why/, why)
