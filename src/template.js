@@ -76,4 +76,4 @@ tmpl.arg = "o";
 tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 ",include=function(s,d){_s+=tmpl(s,d);}";
 
-Lettuce.prototype.tmpl = tmpl;
+Lettuce.prototype.tmpl = Lettuce.tmpl = tmpl;

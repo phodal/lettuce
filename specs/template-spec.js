@@ -5,6 +5,9 @@ describe("Template", function() {
 
     beforeEach(function() {
         L = new lettuce();
+        var element = document.createElement('div');
+        element.id = "results";
+        document.body.appendChild(element);
     });
 
     it("should be able render page", function() {
@@ -41,20 +44,11 @@ describe("Template", function() {
 
     //
     it("should be call innerHTml", function() {
-        var getElementById = {
-            innerHTML:""
-        };
-        //var dummyElement = document.createElement('div');
-        getElementById.innerHTML = jasmine.createSpy('HTML Element');
-        ////document.getElementById.innerHTML = dummyElement ;
+        var element = document.createElement('div');
+        element.id = "head";
+        document.body.appendChild(element);
 
-        var document = jasmine.createSpy('spy');
-        var document = {
-            getElementById: getElementById.innerHTML
-        };
-
-        document.getElementById("head");
-        //L.tmpl.load("head");
-        expect(document.getElementById).toHaveBeenCalledWith("head");
+        L.tmpl.load("head");
+        expect(document.getElementById("head").innerHTML).toBe("");
     });
 });

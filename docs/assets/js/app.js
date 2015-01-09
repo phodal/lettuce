@@ -7,21 +7,30 @@
         why: "Why is a new Framework."
     };
 
-    var about = new L.SimpleView(data, data.about);
-
-    var what = new L.SimpleView(data, data.what);
-
-    var why = new L.SimpleView(data, data.why);
-
     var home = function (){
         L.Router.navigate("");
     };
 
+	var aboutPage = function(){
+		var aboutPage = new L.SimpleView();
+        return aboutPage.render(data, "about");
+    };
+
+    var whyPage = function(){
+        var whyPage = new L.SimpleView();
+        return whyPage.render(data, "why");
+    };
+
+    var whatPage = function(){
+        var whatPage = new L.SimpleView();
+        return whatPage.render(data, "what");
+    };
+
     L.Router
         .add(/#/, home)
-        .add(/#about/, about.render)
-        .add(/#what/, what.render)
-        .add(/#why/, why.render)
+        .add(/#about/, aboutPage)
+        .add(/#what/, whatPage)
+        .add(/#why/, whyPage)
         .load();
 
     L.Event.on('tick', function (results) {

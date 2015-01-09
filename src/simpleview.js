@@ -1,24 +1,19 @@
-//var SimpleView = new Lettuce.prototype.Class(function (data, type) {
-//    this.data = data;
-//    this.message = type;
-//});
+var SimpleView = new Lettuce.prototype.Class(function () {
 
-function SimpleView (data, type){
-    this.data = data;
-    this.message = type;
-}
+});
 
 SimpleView.prototype.init = function () {
-    var result = Lettuce.tmpl("<h3>" + this.message + "</h3>", this.data);
-    document.getElementById("results").innerHTML = result;
+
 };
 
 
-SimpleView.prototype.render = function () {
-
+SimpleView.prototype.render = function (data, type) {
+    var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
+    document.getElementById("results").innerHTML = result;
 };
 
 var simpleView = {
     SimpleView: SimpleView
 };
+
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
