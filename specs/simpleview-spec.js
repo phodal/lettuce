@@ -16,8 +16,9 @@ describe("SimpleView", function() {
         };
 
         spyOn(lettuce, "tmpl");
-        var why = new Lettuce.SimpleView(data, data.why);
-        //why.render();
-        //expect(lettuce.tmpl).toHaveBeenCalled();
+        var why = new Lettuce.SimpleView();
+        var templates = lettuce.tmpl("<h3>{%=o.why%}</h3>", data);
+        why.render(templates, "results");
+        expect(lettuce.tmpl).toHaveBeenCalled();
     });
 });
