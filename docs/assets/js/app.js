@@ -13,17 +13,20 @@
 
 	var aboutPage = function(){
 		var aboutPage = new L.SimpleView();
-        return aboutPage.render(data, "about");
+        var templates = l.tmpl("<h3>{%=o.about%}</h3>", data);
+        return aboutPage.render(templates, "results");
     };
 
     var whyPage = function(){
         var whyPage = new L.SimpleView();
-        return whyPage.render(data, "why");
+        var templates = l.tmpl("<h3>{%=o.why%}</h3>", data);
+        return whyPage.render(templates, "results");
     };
 
     var whatPage = function(){
         var whatPage = new L.SimpleView();
-        return whatPage.render(data, "what");
+        var templates = l.tmpl("<h3>{%=o.what%}</h3>", data);
+        return whatPage.render(templates, "results");
     };
 
     L.Router

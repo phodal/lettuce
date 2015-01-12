@@ -292,9 +292,9 @@ SimpleView.prototype.init = function () {
 };
 
 
-SimpleView.prototype.render = function (data, type) {
-    var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
-    document.getElementById("results").innerHTML = result;
+SimpleView.prototype.render = function (tmpl, id) {
+    //var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
+    document.getElementById(id).innerHTML = tmpl;
 };
 
 var simpleView = {
