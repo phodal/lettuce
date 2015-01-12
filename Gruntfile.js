@@ -16,6 +16,7 @@ module.exports = function (grunt) {
             src : 'dist/lettuce.js',
             options : {
                 host: "http://0.0.0.0:8000",
+                vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js'],
                 specs : 'specs/*-spec.js',
                 template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {
@@ -27,10 +28,10 @@ module.exports = function (grunt) {
                         }
                     },
                     thresholds: {
-                        lines: 75,
-                        statements: 75,
-                        //branches: 75,
-                        functions: 70
+                        lines: 85,
+                        statements: 85,
+                        branches: 70,
+                        functions: 85
                     }
                 }
             }
