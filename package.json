@@ -28,6 +28,7 @@
     "devDependencies": {
         "grunt": "~0.4.1",
         "jasmine-ajax": "2.99.0",
+        "grunt-replace": "0.8.0",
         "grunt-contrib-concat": "~0.3.0",
         "grunt-contrib-jshint": "~0.6.4",
         "grunt-contrib-uglify": "~0.2.4",

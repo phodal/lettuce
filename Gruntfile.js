@@ -84,6 +84,27 @@ module.exports = function (grunt) {
         watch: {
             files: ['<%= jshint.files %>'],
             tasks: ['concat', 'jshint', 'qunit']
+        },
+
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                        {
+                            match: 'version',
+                            replacement: '<%= pkg.version %>'
+                        }
+                    ]
+                },
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['src/main.js'],
+                        dest: 'src/'
+                    }
+                ]
+            }
         }
 
     });
@@ -94,8 +115,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('test', ['jshint', 'connect', 'jasmine']);
-    grunt.registerTask('default', ['concat', 'jshint', 'connect', 'jasmine', 'uglify']);
+    grunt.registerTask('test', ['replace', 'jshint', 'connect', 'jasmine']);
+    grunt.registerTask('default', ['replace', 'concat', 'jshint', 'connect', 'jasmine', 'uglify']);
 
 };
