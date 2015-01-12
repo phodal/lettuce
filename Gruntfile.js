@@ -100,8 +100,8 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         flatten: true,
-                        src: ['src/main.js'],
-                        dest: 'src/'
+                        src: ['dist/lettuce.js', 'dist/lettuce.min.js'],
+                        dest: 'dist/'
                     }
                 ]
             }
