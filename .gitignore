@@ -21,4 +21,4 @@ results/
 learning/
 coverage/
 report/
-main.js
+dist/main.js
