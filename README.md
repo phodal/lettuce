@@ -30,20 +30,23 @@ var data = {
 3.create function for router
 
 ```javascript
-function about() {
-    var result = L.tmpl("<h3>{%=o.about%}</h3>", data);
-    document.getElementById("results").innerHTML = result;
+var aboutPage = function(){
+    var aboutPage = new L.SimpleView();
+    var templates = l.tmpl("<h3>{%=o.about%}</h3>", data);
+    return aboutPage.render(templates, "results");
 };
 
-function what() {
-    var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
-    document.getElementById("results").innerHTML = result;
-}
+var whyPage = function(){
+    var whyPage = new L.SimpleView();
+    var templates = l.tmpl("<h3>{%=o.why%}</h3>", data);
+    return whyPage.render(templates, "results");
+};
 
-function why() {
-    var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
-    document.getElementById("results").innerHTML = result;
-}
+var whatPage = function(){
+    var whatPage = new L.SimpleView();
+    var templates = l.tmpl("<h3>{%=o.what%}</h3>", data);
+    return whatPage.render(templates, "results");
+};
 ```
 4.Add router
 
@@ -68,31 +71,12 @@ L.Router
 
 ###On Going
 
+- View
+
+
+###Todo
+
 - Model
-
-##Simple View
-
-
-```javascript
-var pageView = function(){};
-pageView.prototype = {
-    init:function(){
-        var result = L.tmpl("<h3>" + this.message + "</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
-};
-
-var about = new L.Class(pageView);
-about.prototype.message = data.about;
-
-var what = new L.Class(pageView);
-what.prototype.message = data.what;
-
-var why = new L.Class(pageView);
-why.prototype.message = data.why;
-```
-
-
 
 ## License
 
