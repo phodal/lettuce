@@ -45,7 +45,6 @@ module.exports = function (grunt) {
                     'src/_intro.js',
                     'src/main.js',
                     'src/helpers.js',
-                    'src/promise.js',
                     'src/class.js',
                     'src/ajax.js',
                     'src/event.js',

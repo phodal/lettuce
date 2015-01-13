@@ -9,8 +9,8 @@ describe("Router", function() {
     });
 
     it("should be able to different router in page", function() {
-        var log = function(result){
-            console.log(result);
+        var log = function(){
+
         };
 
         var check = L.Router
