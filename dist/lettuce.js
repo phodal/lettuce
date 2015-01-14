@@ -100,6 +100,21 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
 })('prototype', ({}).hasOwnProperty);
 
 
+var Parser = new Lettuce.prototype.Class(function () {
+
+});
+
+Parser.prototype.init = function () {
+
+};
+
+var parser = {
+    Parser: Parser
+};
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, parser);
+
+
 Lettuce.get = function (url, callback) {
     Lettuce.send(url, 'GET', callback);
 };
