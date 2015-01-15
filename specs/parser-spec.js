@@ -17,11 +17,11 @@ describe("Parser", function () {
                 func();
             },
 
-            bakeCake: function() {
+            HomePage: function() {
                 func();
             },
 
-            bakeBread: function() {
+            AboutPage: function() {
                 func();
             },
 

@@ -13,7 +13,7 @@ var DSLRunner = {
         this.executeAndRemove('first');
 
         for (var key in this.methods) {
-            if (key !== 'last' && key.match(/^bake/)) {
+            if (key !== 'last' && key.match(/.*Page/)) {
                 this.executeAndRemove(key);
             }
         }
