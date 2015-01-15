@@ -21,3 +21,5 @@ results/
 learning/
 coverage/
 report/
+_SpecRunner.html
+.grunt
