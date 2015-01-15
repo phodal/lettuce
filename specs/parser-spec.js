@@ -15,21 +15,23 @@ describe("Parser", function () {
         Parser.run({
             first: function() {
                 func();
+                expect(called).toEqual(1);
             },
 
             HomePage: function() {
                 func();
+                expect(called).toEqual(2);
             },
 
             AboutPage: function() {
                 func();
+                expect(called).toEqual(3);
             },
 
             last: function() {
                 func();
+                expect(called).toEqual(4);
             }
         });
-
-        expect(called).toEqual(4);
     });
 });
