@@ -118,6 +118,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
 
     grunt.registerTask('test', ['replace', 'jshint', 'connect', 'jasmine']);
-    grunt.registerTask('default', ['replace', 'concat', 'jshint', 'connect', 'jasmine', 'uglify']);
+    grunt.registerTask('default', ['concat','replace', 'jshint', 'connect', 'jasmine', 'uglify']);
 
 };

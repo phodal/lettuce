@@ -1,6 +1,6 @@
 {
     "name": "lettuce",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "生菜, Mini Mobile Framework for Romantic",
     "main": "dist/lettuce.js",
     "scripts": {
