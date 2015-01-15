@@ -8,7 +8,6 @@ Parser.prototype.init = function () {
 
 var DSLRunner = {
     run: function(methods) {
-        this.ingredients = [];
         this.methods     = methods;
 
         this.executeAndRemove('first');
