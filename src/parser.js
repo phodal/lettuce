@@ -22,10 +22,6 @@ var DSLRunner = {
         this.executeAndRemove('last');
     },
 
-    addIngredient: function(ingredient) {
-        this.ingredients.push(ingredient);
-    },
-
     executeAndRemove: function(methodName) {
         var output = this.methods[methodName]();
         delete(this.methods[methodName]);

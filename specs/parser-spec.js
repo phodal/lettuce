@@ -9,6 +9,26 @@ describe("Parser", function () {
     });
 
     it('it must be a function ot Lettuce', function () {
+        var called = 0,
+            func = function () { called++ };
 
+        Parser.run({
+            first: function() {
+                func();
+            },
+
+            bakeCake: function() {
+                func();
+            },
+
+            bakeBread: function() {
+                func();
+            },
+
+            last: function() {
+                func();
+            }
+        });
+        expect(called).toEqual(4);
     });
 });
