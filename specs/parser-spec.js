@@ -34,4 +34,15 @@ describe("Parser", function () {
             }
         });
     });
+
+    it('it should remove all the executed functions', function () {
+        var methods = {
+            'first': function () {}
+        };
+
+        Parser.methods = methods;
+        Parser.executeAndRemove('first');
+
+        expect(Parser.methods).toEqual({});
+    });
 });
