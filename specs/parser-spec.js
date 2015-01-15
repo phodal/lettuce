@@ -8,7 +8,7 @@ describe("Parser", function () {
         Parser = new L.Parser();
     });
 
-    it('it must be a function ot Lettuce', function () {
+    it('it must be a function of Lettuce', function () {
         var called = 0,
             func = function () { called++ };
 
@@ -29,6 +29,7 @@ describe("Parser", function () {
                 func();
             }
         });
+
         expect(called).toEqual(4);
     });
 });
