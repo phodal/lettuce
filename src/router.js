@@ -32,10 +32,7 @@ var Router = {
         var self = this;
         var current = self.getFragment();
         var fn = function() {
-            if(current !== self.getFragment()) {
-                current = self.getFragment();
-                //self.check(current);
-            } else {
+            if (current === self.getFragment()) {
                 self.check(current, self);
             }
         };
@@ -43,6 +40,7 @@ var Router = {
         this.interval = setInterval(fn, 50);
         return this;
     },
+
     navigate: function(path) {
         path = path ? path : '';
         window.location.href.match(/#(.*)$/);
