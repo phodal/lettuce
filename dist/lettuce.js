@@ -20,6 +20,25 @@ Lettuce.isObject = function (obj) {
     return type === 'function' || type === 'object' && !!obj;
 };
 
+Lettuce.isFunction = function(obj) {
+    return typeof obj == 'function' || false;
+};
+
+Lettuce.defaults = function(obj) {
+    if (!Lettuce.isObject(obj)) {
+        return obj;
+    }
+
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        var source = arguments[i];
+        for (var prop in source) {
+            if (obj[prop] === void 0) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
 
 Lettuce.extend = function (obj) {
     if (!Lettuce.isObject(obj)) {
@@ -101,37 +120,36 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
 
 
 var Parser = new Lettuce.prototype.Class(function () {
-
 });
 
-Parser.prototype.init = function () {
-
+Parser.prototype.init = function (options) {
+    this.options = options || {};
+    Lettuce.defaults(this.options, {
+        first: 'first',
+        regex: /.*Page/,
+        last: 'last'
+    });
 };
 
-var DSLRunner = {
-    run: function(methods) {
-        this.methods     = methods;
+Parser.prototype.run = function (methods) {
+    this.methods = methods;
 
-        this.executeAndRemove('first');
+    this.executeAndRemove(this.options.first);
 
-        for (var key in this.methods) {
-            if (key !== 'last' && key.match(/.*Page/)) {
-                this.executeAndRemove(key);
-            }
+    for (var key in this.methods) {
+        if (key !== this.options.last && key.match(this.options.regex)) {
+            this.executeAndRemove(key);
         }
-
-        this.executeAndRemove('last');
-    },
-
-    executeAndRemove: function(methodName) {
-        var output = this.methods[methodName]();
-        delete(this.methods[methodName]);
-        return output;
     }
+
+    this.executeAndRemove(this.options.last);
 };
 
-Parser.prototype = Lettuce.extend(Parser.prototype, DSLRunner);
-
+Parser.prototype.executeAndRemove = function (methodName) {
+    var output = this.methods[methodName]();
+    delete(this.methods[methodName]);
+    return output;
+};
 
 var parser = {
     Parser: Parser
@@ -308,23 +326,26 @@ var Router = {
     mode: null,
     root: '/',
     hashStrip: /^#*/,
-    getFragment: function(loc) {
-        return (loc || window.location).hash.replace(this.hashStrip, '');
+    location: window.location,
+
+    getFragment: function() {
+        return (this.location).hash.replace(this.hashStrip, '');
     },
 
-    add: function(re, handler) {
-        if(typeof re === 'function') {
-            handler = re;
-            re = '';
+    add: function(regex, handler) {
+        if(Lettuce.isFunction(regex)) {
+            handler = regex;
+            regex = '';
         }
-        this.routes.push({ re: re, handler: handler});
+        this.routes.push({ regex: regex, handler: handler});
         return this;
     },
+
     check: function (current, self) {
         var fragment = current || self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
-            var match = newFragment.match(self.routes[i].re);
+            var match = newFragment.match(self.routes[i].regex);
             if (match) {
                 match.shift();
                 self.routes[i].handler.apply({}, match);
@@ -336,10 +357,7 @@ var Router = {
         var self = this;
         var current = self.getFragment();
         var fn = function() {
-            if(current !== self.getFragment()) {
-                current = self.getFragment();
-                //self.check(current);
-            } else {
+            if (current === self.getFragment()) {
                 self.check(current, self);
             }
         };
@@ -347,10 +365,11 @@ var Router = {
         this.interval = setInterval(fn, 50);
         return this;
     },
+
     navigate: function(path) {
         path = path ? path : '';
-        window.location.href.match(/#(.*)$/);
-        window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
+        this.location.href.match(/#(.*)$/);
+        this.location.href = this.location.href.replace(/#(.*)$/, '') + '#' + path;
         return this;
     }
 };
