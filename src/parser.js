@@ -1,35 +1,34 @@
-var Parser = new Lettuce.prototype.Class(function () {
-
+var Parser = new Lettuce.prototype.Class(function (options) {
+    this.options = options;
 });
 
 Parser.prototype.init = function () {
-
+    this.options = {
+        first: 'first',
+        regex: /.*Page/,
+        last: 'last'
+    };
 };
 
-var DSLRunner = {
-    run: function(methods) {
-        this.methods     = methods;
+Parser.prototype.run = function (methods) {
+    this.methods = methods;
 
-        this.executeAndRemove('first');
+    this.executeAndRemove(this.options.first);
 
-        for (var key in this.methods) {
-            if (key !== 'last' && key.match(/.*Page/)) {
-                this.executeAndRemove(key);
-            }
+    for (var key in this.methods) {
+        if (key !== this.options.last && key.match(this.options.regex)) {
+            this.executeAndRemove(key);
         }
-
-        this.executeAndRemove('last');
-    },
-
-    executeAndRemove: function(methodName) {
-        var output = this.methods[methodName]();
-        delete(this.methods[methodName]);
-        return output;
     }
+
+    this.executeAndRemove(this.options.last);
 };
 
-Parser.prototype = Lettuce.extend(Parser.prototype, DSLRunner);
-
+Parser.prototype.executeAndRemove = function (methodName) {
+    var output = this.methods[methodName]();
+    delete(this.methods[methodName]);
+    return output;
+};
 
 var parser = {
     Parser: Parser
