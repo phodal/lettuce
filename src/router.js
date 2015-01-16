@@ -4,8 +4,10 @@ var Router = {
     mode: null,
     root: '/',
     hashStrip: /^#*/,
+    location: window.location,
+
     getFragment: function(loc) {
-        return (loc || window.location).hash.replace(this.hashStrip, '');
+        return (loc || this.location).hash.replace(this.hashStrip, '');
     },
 
     add: function(re, handler) {
@@ -16,6 +18,7 @@ var Router = {
         this.routes.push({ re: re, handler: handler});
         return this;
     },
+
     check: function (current, self) {
         var fragment = current || self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
@@ -43,8 +46,8 @@ var Router = {
 
     navigate: function(path) {
         path = path ? path : '';
-        window.location.href.match(/#(.*)$/);
-        window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
+        this.location.href.match(/#(.*)$/);
+        this.location.href = this.location.href.replace(/#(.*)$/, '') + '#' + path;
         return this;
     }
 };
