@@ -19,7 +19,7 @@ describe("Router", function() {
             .add(/#why/, log)
             .load();
 
-        expect("/#about/".toString()).toEqual(check["routes"][0]["re"].toString());
+        expect("/#about/".toString()).toEqual(check["routes"][0]["regex"].toString());
 
         check.navigate("all.html");
         expect(window.location.href).not.toEqual("file:///all.html");

@@ -10,12 +10,12 @@ var Router = {
         return (loc || this.location).hash.replace(this.hashStrip, '');
     },
 
-    add: function(re, handler) {
-        if(typeof re === 'function') {
-            handler = re;
-            re = '';
+    add: function(regex, handler) {
+        if(typeof regex === 'function') {
+            handler = regex;
+            regex = '';
         }
-        this.routes.push({ re: re, handler: handler});
+        this.routes.push({ regex: regex, handler: handler});
         return this;
     },
 
@@ -23,7 +23,7 @@ var Router = {
         var fragment = current || self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
-            var match = newFragment.match(self.routes[i].re);
+            var match = newFragment.match(self.routes[i].regex);
             if (match) {
                 match.shift();
                 self.routes[i].handler.apply({}, match);
