@@ -10,6 +10,22 @@ Lettuce.isFunction = function(obj) {
     return typeof obj == 'function' || false;
 };
 
+Lettuce.defaults = function(obj) {
+    if (!Lettuce.isObject(obj)) {
+        return obj;
+    }
+
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        var source = arguments[i];
+        for (var prop in source) {
+            if (obj[prop] === void 0) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
+
 Lettuce.extend = function (obj) {
     if (!Lettuce.isObject(obj)) {
         return obj;

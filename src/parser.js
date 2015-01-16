@@ -1,13 +1,13 @@
-var Parser = new Lettuce.prototype.Class(function (options) {
-    this.options = options;
+var Parser = new Lettuce.prototype.Class(function () {
 });
 
-Parser.prototype.init = function () {
-    this.options = {
+Parser.prototype.init = function (options) {
+    this.options = options || {};
+    Lettuce.defaults(this.options, {
         first: 'first',
         regex: /.*Page/,
         last: 'last'
-    };
+    });
 };
 
 Parser.prototype.run = function (methods) {
