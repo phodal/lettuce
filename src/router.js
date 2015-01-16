@@ -6,12 +6,12 @@ var Router = {
     hashStrip: /^#*/,
     location: window.location,
 
-    getFragment: function(loc) {
-        return (loc || this.location).hash.replace(this.hashStrip, '');
+    getFragment: function() {
+        return (this.location).hash.replace(this.hashStrip, '');
     },
 
     add: function(regex, handler) {
-        if(typeof regex === 'function') {
+        if(Lettuce.isFunction(regex)) {
             handler = regex;
             regex = '';
         }

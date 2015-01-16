@@ -6,6 +6,9 @@ Lettuce.isObject = function (obj) {
     return type === 'function' || type === 'object' && !!obj;
 };
 
+Lettuce.isFunction = function(obj) {
+    return typeof obj == 'function' || false;
+};
 
 Lettuce.extend = function (obj) {
     if (!Lettuce.isObject(obj)) {
