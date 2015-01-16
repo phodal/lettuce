@@ -1,4 +1,4 @@
-describe("mocking ajax", function () {
+describe("Ajax", function () {
     beforeEach(function () {
         jasmine.Ajax.install();
     });
