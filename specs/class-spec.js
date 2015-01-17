@@ -1,7 +1,7 @@
 'use strict';
 
 describe("Class", function () {
-    var L, ninja, Person;
+    var L, ninja, Person, killer;
 
     L = new lettuce();
     var Person = L.Class(function (person) {
@@ -23,6 +23,8 @@ describe("Class", function () {
     });
 
     ninja = Ninja();
+    var Killer = Ninja.extend({name: "killer"});
+    killer = Killer();
 
     it('respects instanceof', function () {
         var results = ninja instanceof Person;
@@ -31,6 +33,10 @@ describe("Class", function () {
 
     it('inherits methods (also super)', function () {
         expect(ninja.dance).toBeUndefined();
+    });
+
+    it('extend methods', function () {
+        expect(killer.name).toEqual('killer');
     });
 
 });

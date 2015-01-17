@@ -1,6 +1,4 @@
-var SimpleView = new Lettuce.prototype.Class(function () {
-
-});
+var SimpleView = new Lettuce.prototype.Class({});
 
 SimpleView.prototype.init = function () {
 

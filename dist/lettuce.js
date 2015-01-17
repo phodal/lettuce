@@ -119,8 +119,7 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
 })('prototype', ({}).hasOwnProperty);
 
 
-var Parser = new Lettuce.prototype.Class(function () {
-});
+var Parser = new Lettuce.prototype.Class({});
 
 Parser.prototype.init = function (options) {
     this.options = options || {};
@@ -297,9 +296,7 @@ tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 Lettuce.prototype.tmpl = Lettuce.tmpl = tmpl;
 
 
-var SimpleView = new Lettuce.prototype.Class(function () {
-
-});
+var SimpleView = new Lettuce.prototype.Class({});
 
 SimpleView.prototype.init = function () {
 

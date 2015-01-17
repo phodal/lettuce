@@ -1,5 +1,4 @@
-var Parser = new Lettuce.prototype.Class(function () {
-});
+var Parser = new Lettuce.prototype.Class({});
 
 Parser.prototype.init = function (options) {
     this.options = options || {};
