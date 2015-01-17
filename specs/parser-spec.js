@@ -36,13 +36,16 @@ describe("Parser", function () {
     });
 
     it('it should remove all the executed functions', function () {
-        var methods = {
-            'first': function () {}
+        var called = 0, methods = {
+            'first': function () {
+                called ++ ;
+            }
         };
 
         Parser.methods = methods;
-        Parser.executeAndRemove('first');
+        Parser.execute('first');
+        Parser.execute('first');
 
-        expect(Parser.methods).toEqual({});
+        expect(called).toEqual(2);
     });
 });

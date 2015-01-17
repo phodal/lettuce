@@ -13,21 +13,19 @@ Parser.prototype.init = function (options) {
 Parser.prototype.run = function (methods) {
     this.methods = methods;
 
-    this.executeAndRemove(this.options.first);
+    this.execute(this.options.first);
 
     for (var key in this.methods) {
         if (key !== this.options.last && key.match(this.options.regex)) {
-            this.executeAndRemove(key);
+            this.execute(key);
         }
     }
 
-    this.executeAndRemove(this.options.last);
+    this.execute(this.options.last);
 };
 
-Parser.prototype.executeAndRemove = function (methodName) {
-    var output = this.methods[methodName]();
-    delete(this.methods[methodName]);
-    return output;
+Parser.prototype.execute = function (methodName) {
+    this.methods[methodName]();
 };
 
 var parser = {
