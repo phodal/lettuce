@@ -1,7 +1,7 @@
 {
     "name": "lettuce",
     "version": "0.0.8",
-    "description": "生菜, Mini Mobile Framework for Romantic",
+    "description": "Lettuce JS, Mini Mobile Framework for Romantic with DSL.",
     "main": "dist/lettuce.js",
     "scripts": {
         "test": "grunt test;"
@@ -14,7 +14,8 @@
         "lettuce",
         "framework",
         "mvvm",
-        "mvc"
+        "mvc",
+        "dsl"
     ],
     "author": [
         "Fengda HUANG <h@phodal.com>",
