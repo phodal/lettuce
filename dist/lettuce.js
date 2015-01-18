@@ -7,7 +7,7 @@ var Lettuce = function() {
 
 };
 
-Lettuce.VERSION = '0.0.8';
+Lettuce.VERSION = '0.0.9';
 
 root.lettuce = Lettuce;
 
