@@ -1,13 +1,13 @@
 (function(root, undefined) {
 
-  "use strict";
+  'use strict';
 
 
 var Lettuce = function() {
 
 };
 
-Lettuce.VERSION = '0.0.5';
+Lettuce.VERSION = '0.0.8';
 
 root.lettuce = Lettuce;
 
@@ -20,6 +20,25 @@ Lettuce.isObject = function (obj) {
     return type === 'function' || type === 'object' && !!obj;
 };
 
+Lettuce.isFunction = function(obj) {
+    return typeof obj == 'function' || false;
+};
+
+Lettuce.defaults = function(obj) {
+    if (!Lettuce.isObject(obj)) {
+        return obj;
+    }
+
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        var source = arguments[i];
+        for (var prop in source) {
+            if (obj[prop] === void 0) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
 
 Lettuce.extend = function (obj) {
     if (!Lettuce.isObject(obj)) {
@@ -38,86 +57,102 @@ Lettuce.extend = function (obj) {
 };
 
 
-/*
- *  Copyright 2012-2013 (c) Pierre Duquesne <stackp@online.fr>
- *  Licensed under the New BSD License.
- *  https://github.com/stackp/promisejs
- */
-
-function Promise() {
-    this._callbacks = [];
-}
-
-Promise.prototype.then = function(func, context) {
-    var p;
-    if (this._isdone) {
-        p = func.apply(context, this.result);
-    } else {
-        p = new Promise();
-        this._callbacks.push(function () {
-            var res = func.apply(context, arguments);
-            if (res && typeof res.then === 'function') {
-                res.then(p.done, p);
-            }
-        });
-    }
-    return p;
-};
-
-Promise.prototype.done = function() {
-    this.result = arguments;
-    this._isdone = true;
-    for (var i = 0; i < this._callbacks.length; i++) {
-        this._callbacks[i].apply(null, arguments);
-    }
-    this._callbacks = [];
-};
-
-var promise = {
-    Promise: Promise
-};
-
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype, promise);
-
-
 /**
  * Lettuce Class 0.0.1
  * JavaScript Class built-in inheritance system
+ *(c) 2015, Fengda Huang - http://www.phodal.com
  *
- * MIT Licensed.
- * (c) 2015, Fengda Huang - http://www.phodal.com
- *
+ * Copyright (c) 2011, 2012 Jeanine Adkisson.
+ *  MIT Licensed.
  * Inspired by https://github.com/munro/self, https://github.com/jneen/pjs
  */
 
-var objectCreate;
+Lettuce.prototype.Class = (function (prototype, ownProperty) {
 
-if (typeof Object.create === 'function') {
-    objectCreate = Object.create;
-} else {
-    objectCreate = function (o) {
-        function F() {}
-        F.prototype = o;
-        return new F();
+	var lettuceClass = function Klass(_superclass, definition) {
+
+        function Class() {
+            var self = this instanceof Class ? this : new Basic();
+            self.init.apply(self, arguments);
+            return self;
+        }
+
+        function Basic() {
+        }
+
+        Class.Basic = Basic;
+
+        var _super = Basic[prototype] = _superclass[prototype];
+        var proto = Basic[prototype] = Class[prototype] = new Basic();
+
+        proto.constructor = Class;
+
+        Class.extend = function (def) {
+            return new Klass(Class, def);
+        };
+
+        var open = (Class.open = function (def) {
+            if (typeof def === 'function') {
+                def = def.call(Class, proto, _super, Class, _superclass);
+            }
+
+            if (typeof def === 'object') {
+                for (var key in def) {
+                    if (ownProperty.call(def, key)) {
+                        proto[key] = def[key];
+                    }
+                }
+            }
+
+            if (!('init' in proto)) {
+                proto.init = _superclass;
+            }
+
+            return Class;
+        });
+
+        return (open)(definition);
     };
-}
 
-function Class(Parent) {
-    var obj;
+    return lettuceClass;
 
-    if (this instanceof Class) {
-        obj = this;
-    } else {
-        obj = objectCreate(Class.prototype);
+})('prototype', ({}).hasOwnProperty);
+
+
+var Parser = new Lettuce.prototype.Class({});
+
+Parser.prototype.init = function (options) {
+    this.options = options || {};
+    Lettuce.defaults(this.options, {
+        first: 'first',
+        regex: /.*Page/,
+        last: 'last'
+    });
+};
+
+Parser.prototype.run = function (methods) {
+    this.methods = methods;
+
+    this.execute(this.options.first);
+
+    for (var key in this.methods) {
+        if (key !== this.options.last && key.match(this.options.regex)) {
+            this.execute(key);
+        }
     }
 
-    obj.class = Class;
-    obj.super = Parent.prototype;
+    this.execute(this.options.last);
+};
 
-    return obj;
-}
+Parser.prototype.execute = function (methodName) {
+    this.methods[methodName]();
+};
 
-Lettuce.prototype.Class = Class;
+var parser = {
+    Parser: Parser
+};
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, parser);
 
 
 Lettuce.get = function (url, callback) {
@@ -206,9 +241,7 @@ var tmpl = function (str, data) {
             str.replace(tmpl.regexp, tmpl.func) +
             "';return _s;"
         );
-    return data ? f(data, tmpl) : function (data) {
-        return f(data, tmpl);
-    };
+    return f(data, tmpl);
 };
 tmpl.cache = {};
 tmpl.load = function (id) {
@@ -258,7 +291,26 @@ tmpl.arg = "o";
 tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
 ",include=function(s,d){_s+=tmpl(s,d);}";
 
-Lettuce.prototype.tmpl = tmpl;
+Lettuce.prototype.tmpl = Lettuce.tmpl = tmpl;
+
+
+var SimpleView = new Lettuce.prototype.Class({});
+
+SimpleView.prototype.init = function () {
+
+};
+
+
+SimpleView.prototype.render = function (tmpl, id) {
+    //var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
+    document.getElementById(id).innerHTML = tmpl;
+};
+
+var simpleView = {
+    SimpleView: SimpleView
+};
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
 
 
 //Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url & Backbone
@@ -267,23 +319,26 @@ var Router = {
     mode: null,
     root: '/',
     hashStrip: /^#*/,
-    getFragment: function(loc) {
-        return (loc || window.location).hash.replace(this.hashStrip, '');
+    location: window.location,
+
+    getFragment: function() {
+        return (this.location).hash.replace(this.hashStrip, '');
     },
 
-    add: function(re, handler) {
-        if(typeof re === 'function') {
-            handler = re;
-            re = '';
+    add: function(regex, handler) {
+        if(Lettuce.isFunction(regex)) {
+            handler = regex;
+            regex = '';
         }
-        this.routes.push({ re: re, handler: handler});
+        this.routes.push({ regex: regex, handler: handler});
         return this;
     },
+
     check: function (current, self) {
         var fragment = current || self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
-            var match = newFragment.match(self.routes[i].re);
+            var match = newFragment.match(self.routes[i].regex);
             if (match) {
                 match.shift();
                 self.routes[i].handler.apply({}, match);
@@ -292,24 +347,27 @@ var Router = {
     },
 
     load: function() {
-        var self = this;
-        var current = self.getFragment();
-        var fn = function() {
-            if(current !== self.getFragment()) {
-                current = self.getFragment();
-                //self.check(current);
-            } else {
+        var self, current, fn;
+        self = this;
+        fn = function() {
+            current = self.getFragment();
+            if (current === self.getFragment()) {
                 self.check(current, self);
             }
         };
-        clearInterval(this.interval);
-        this.interval = setInterval(fn, 50);
+        if (window.addEventListener) {
+            window.addEventListener("hashchange", fn, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent("onhashchange", fn);
+        }
         return this;
     },
+
     navigate: function(path) {
         path = path ? path : '';
-        window.location.href.match(/#(.*)$/);
-        window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
+        this.location.href.match(/#(.*)$/);
+        this.location.href = this.location.href.replace(/#(.*)$/, '') + '#' + path;
         return this;
     }
 };
