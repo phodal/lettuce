@@ -18,7 +18,7 @@ describe("Template", function() {
         var result = L.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
         expect("<h3>JavaScript Templates</h3>\n!@#$%^&*()-=").toEqual(result);
 
-	    var special = "\n!@#$%^&*()-=_+{}[]\|:;/.,{";
+	    var special = "\n!@#$%^&*()-=_+{}'\"'[]\|:;/.,{";
         var result = L.tmpl(special, data);
         expect(special).toEqual(result);
     });
