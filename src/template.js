@@ -24,9 +24,7 @@ var tmpl = function (str, data) {
             str.replace(tmpl.regexp, tmpl.func) +
             "';return _s;"
         );
-    return data ? f(data, tmpl) : function (data) {
-        return f(data, tmpl);
-    };
+    return f(data, tmpl);
 };
 tmpl.cache = {};
 tmpl.load = function (id) {
