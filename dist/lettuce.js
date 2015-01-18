@@ -347,15 +347,20 @@ var Router = {
     },
 
     load: function() {
-        var self = this;
-        var current = self.getFragment();
-        var fn = function() {
+        var self, current, fn;
+        self = this;
+        fn = function() {
+            current = self.getFragment();
             if (current === self.getFragment()) {
                 self.check(current, self);
             }
         };
-        clearInterval(this.interval);
-        this.interval = setInterval(fn, 50);
+        if (window.addEventListener) {
+            window.addEventListener("hashchange", fn, false);
+        }
+        else if (window.attachEvent) {
+            window.attachEvent("onhashchange", fn);
+        }
         return this;
     },
 
