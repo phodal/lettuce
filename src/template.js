@@ -16,14 +16,19 @@
 /*global document */
 
 var tmpl = function (str, data) {
-    var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
-    tmpl(tmpl.load(str)) :
-        new Function(
-            tmpl.arg + ',tmpl',
-            "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
+    function func() {
+        var fn, variable;
+	    variable = tmpl.arg + ',tmpl';
+        fn = "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
             str.replace(tmpl.regexp, tmpl.func) +
-            "';return _s;"
-        );
+            "';";
+        fn = fn + "return _s;";
+        return new Function(variable, fn);
+    }
+
+    var f = !/[^\w\-\.:]/.test(str) ?
+        tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str)) :
+        func();
     return f(data, tmpl);
 };
 tmpl.cache = {};
