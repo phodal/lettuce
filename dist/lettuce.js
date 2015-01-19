@@ -132,9 +132,7 @@ Parser.prototype.init = function (options) {
 
 Parser.prototype.run = function (methods) {
     this.methods = methods;
-
     this.execute(this.options.first);
-
     for (var key in this.methods) {
         if (key !== this.options.last && key.match(this.options.regex)) {
             this.execute(key);
@@ -233,7 +231,7 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, event);
 /*global document */
 
 var tmpl = function (str, data) {
-    function func() {
+    function compile() {
         var fn, variable;
 	    variable = tmpl.arg + ',tmpl';
         fn = "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
@@ -243,15 +241,10 @@ var tmpl = function (str, data) {
         return new Function(variable, fn);
     }
 
-    var f = !/[^\w\-\.:]/.test(str) ?
-        tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str)) :
-        func();
+    var f = !/[^\w\-\.:]/.test(str) ? "" : compile();
     return f(data, tmpl);
 };
-tmpl.cache = {};
-tmpl.load = function (id) {
-    return document.getElementById(id).innerHTML;
-};
+
 tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 tmpl.func = function (s, p1, p2, p3, p4, p5) {
     if (p1) { // whitespace, quote and backspace in HTML context
@@ -307,7 +300,6 @@ SimpleView.prototype.init = function () {
 
 
 SimpleView.prototype.render = function (tmpl, id) {
-    //var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
     document.getElementById(id).innerHTML = tmpl;
 };
 

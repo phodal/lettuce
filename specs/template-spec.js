@@ -42,13 +42,12 @@ describe("Template", function() {
         expect(L.tmpl('{% print(o.special, true); %}',data)).toEqual('<>&"\'\x00');
     });
 
+    //it("should be call innerHTml", function() {
+    //    var element = document.createElement('div');
+    //    element.id = "head";
+    //    document.body.appendChild(element);
     //
-    it("should be call innerHTml", function() {
-        var element = document.createElement('div');
-        element.id = "head";
-        document.body.appendChild(element);
-
-        L.tmpl.load("head");
-        expect(document.getElementById("head").innerHTML).toBe("");
-    });
+    //    L.tmpl.load("head");
+    //    expect(document.getElementById("head").innerHTML).toBe("");
+    //});
 });

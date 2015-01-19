@@ -11,9 +11,7 @@ Parser.prototype.init = function (options) {
 
 Parser.prototype.run = function (methods) {
     this.methods = methods;
-
     this.execute(this.options.first);
-
     for (var key in this.methods) {
         if (key !== this.options.last && key.match(this.options.regex)) {
             this.execute(key);

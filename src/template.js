@@ -26,15 +26,10 @@ var tmpl = function (str, data) {
         return new Function(variable, fn);
     }
 
-    var f = !/[^\w\-\.:]/.test(str) ?
-        tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str)) :
-        compile();
+    var f = !/[^\w\-\.:]/.test(str) ? "" : compile();
     return f(data, tmpl);
 };
-tmpl.cache = {};
-tmpl.load = function (id) {
-    return document.getElementById(id).innerHTML;
-};
+
 tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 tmpl.func = function (s, p1, p2, p3, p4, p5) {
     if (p1) { // whitespace, quote and backspace in HTML context
