@@ -40,9 +40,7 @@ var Router = {
 
         checkUrl = function () {
             current = self.getFragment();
-            if (current === self.getFragment()) {
-                self.check(current, self);
-            }
+            self.check(current, self);
         };
 
         function addEventListener() {
