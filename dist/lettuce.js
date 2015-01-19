@@ -313,7 +313,10 @@ var simpleView = {
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
 
 
-//Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url & Backbone
+/*
+ *Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url
+ *  Backbone
+ */
 var Router = {
     routes: [],
     mode: null,
@@ -321,16 +324,16 @@ var Router = {
     hashStrip: /^#*/,
     location: window.location,
 
-    getFragment: function() {
+    getFragment: function () {
         return (this.location).hash.replace(this.hashStrip, '');
     },
 
-    add: function(regex, handler) {
-        if(Lettuce.isFunction(regex)) {
+    add: function (regex, handler) {
+        if (Lettuce.isFunction(regex)) {
             handler = regex;
             regex = '';
         }
-        this.routes.push({ regex: regex, handler: handler});
+        this.routes.push({regex: regex, handler: handler});
         return this;
     },
 
@@ -346,25 +349,33 @@ var Router = {
         }
     },
 
-    load: function() {
-        var self, current, fn;
+    load: function () {
+        var self, current, checkUrl;
         self = this;
-        fn = function() {
+
+        checkUrl = function () {
             current = self.getFragment();
             if (current === self.getFragment()) {
+                console.log("every time");
                 self.check(current, self);
             }
         };
-        if (window.addEventListener) {
-            window.addEventListener("hashchange", fn, false);
+
+        function addEventListener() {
+            if (window.addEventListener) {
+                window.addEventListener("hashchange", checkUrl, false);
+            }
+            else if (window.attachEvent) {
+                window.attachEvent("onhashchange", checkUrl);
+            }
         }
-        else if (window.attachEvent) {
-            window.attachEvent("onhashchange", fn);
-        }
+
+        addEventListener();
+
         return this;
     },
 
-    navigate: function(path) {
+    navigate: function (path) {
         path = path ? path : '';
         this.location.href.match(/#(.*)$/);
         this.location.href = this.location.href.replace(/#(.*)$/, '') + '#' + path;
