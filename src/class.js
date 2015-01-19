@@ -33,11 +33,11 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
         };
 
         var open = (Class.open = function (def) {
-            if (typeof def === 'function') {
+            if (Lettuce.isFunction(def)) {
                 def = def.call(Class, proto, _super, Class, _superclass);
             }
 
-            if (typeof def === 'object') {
+            if (Lettuce.isObject(def)) {
                 for (var key in def) {
                     if (ownProperty.call(def, key)) {
                         proto[key] = def[key];
