@@ -58,13 +58,13 @@ describe("Router", function() {
             .add(some, somefunc)
             .load();
 
+        router.navigate("about/");
         jasmine.clock().tick(101);
-
-        router.check('about', router);
+        router.check(router);
         expect(log).toHaveBeenCalled();
 
         jasmine.clock().tick(101);
-        router.check('sp,e', router);
+        router.check(router);
         expect(somefunc).not.toHaveBeenCalled();
     });
 });

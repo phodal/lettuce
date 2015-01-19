@@ -22,8 +22,8 @@ var Router = {
         return this;
     },
 
-    check: function (current, self) {
-        var fragment = current || self.getFragment();
+    check: function (self) {
+        var fragment = self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
             var match = newFragment.match(self.routes[i].regex);
@@ -35,12 +35,11 @@ var Router = {
     },
 
     load: function () {
-        var self, current, checkUrl;
+        var self, checkUrl;
         self = this;
 
         checkUrl = function () {
-            current = self.getFragment();
-            self.check(current, self);
+            self.check(self);
         };
 
         function addEventListener() {
@@ -53,7 +52,6 @@ var Router = {
         }
 
         addEventListener();
-
         return this;
     },
 

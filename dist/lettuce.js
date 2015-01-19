@@ -12,8 +12,9 @@ Lettuce.VERSION = '0.1.0';
 root.lettuce = Lettuce;
 
 
-//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
+/*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+*     Underscore may be freely distributed under the MIT license.
+*/
 
 Lettuce.isObject = function (obj) {
     var type = typeof obj;
@@ -334,8 +335,8 @@ var Router = {
         return this;
     },
 
-    check: function (current, self) {
-        var fragment = current || self.getFragment();
+    check: function (self) {
+        var fragment = self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
             var match = newFragment.match(self.routes[i].regex);
@@ -347,12 +348,11 @@ var Router = {
     },
 
     load: function () {
-        var self, current, checkUrl;
+        var self, checkUrl;
         self = this;
 
         checkUrl = function () {
-            current = self.getFragment();
-            self.check(current, self);
+            self.check(self);
         };
 
         function addEventListener() {
@@ -365,7 +365,6 @@ var Router = {
         }
 
         addEventListener();
-
         return this;
     },
 
