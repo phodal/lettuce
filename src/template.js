@@ -16,7 +16,7 @@
 /*global document */
 
 var tmpl = function (str, data) {
-    function func() {
+    function compile() {
         var fn, variable;
 	    variable = tmpl.arg + ',tmpl';
         fn = "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
@@ -28,7 +28,7 @@ var tmpl = function (str, data) {
 
     var f = !/[^\w\-\.:]/.test(str) ?
         tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str)) :
-        func();
+        compile();
     return f(data, tmpl);
 };
 tmpl.cache = {};
