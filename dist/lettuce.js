@@ -307,7 +307,7 @@ var template = {
     Template: Template
 };
 
-Lettuce.prototype.tmpl = Lettuce.extend(Lettuce.prototype, template);
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
 
 
 var SimpleView = new Lettuce.prototype.Class({});

@@ -59,7 +59,7 @@ var Template = {
             }
         );
     },
-    
+
     func: function (s, p1, p2, p3, p4, p5) {
         var specialCharMAP = {
             "\n": "\\n",
@@ -90,4 +90,4 @@ var template = {
     Template: Template
 };
 
-Lettuce.prototype.tmpl = Lettuce.extend(Lettuce.prototype, template);
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
