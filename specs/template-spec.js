@@ -18,7 +18,7 @@ describe("Template", function() {
         var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
         expect("<h3>JavaScript Templates</h3>\n!@#$%^&*()-=").toEqual(result);
 
-	    var special = "\n!@#$%^&*()-=_+{}'\"'[]\|:;/.,{";
+        var special = "\n!@#$%^&*()-=_+{}'\"'[]\|:;/.,{";
         var result = L.Template.tmpl(special, data);
         expect(special).toEqual(result);
     });
@@ -41,13 +41,4 @@ describe("Template", function() {
         expect(L.Template.tmpl('{% print(o.special); %}',data)).toEqual('&lt;&gt;&amp;&quot;&#39;');
         expect(L.Template.tmpl('{% print(o.special, true); %}',data)).toEqual('<>&"\'\x00');
     });
-
-    //it("should be call innerHTml", function() {
-    //    var element = document.createElement('div');
-    //    element.id = "head";
-    //    document.body.appendChild(element);
-    //
-    //    L.tmpl.load("head");
-    //    expect(document.getElementById("head").innerHTML).toBe("");
-    //});
 });
