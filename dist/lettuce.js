@@ -132,15 +132,16 @@ Parser.prototype.init = function (options) {
 };
 
 Parser.prototype.run = function (methods) {
-    this.methods = methods;
-    this.execute(this.options.first);
-    for (var key in this.methods) {
-        if (key !== this.options.last && key.match(this.options.regex)) {
+    var self = this;
+    self.methods = methods;
+    self.execute(self.options.first);
+    for (var key in self.methods) {
+        if (key !== self.options.last && key.match(self.options.regex)) {
             this.execute(key);
         }
     }
 
-    this.execute(this.options.last);
+    self.execute(self.options.last);
 };
 
 Parser.prototype.execute = function (methodName) {
@@ -275,7 +276,7 @@ var Template = {
             }
         );
     },
-    
+
     func: function (s, p1, p2, p3, p4, p5) {
         var specialCharMAP = {
             "\n": "\\n",
