@@ -1,21 +1,17 @@
 (function(root, undefined) {
-
   'use strict';
 
 
 var Lettuce = function() {
 
 };
-
 Lettuce.VERSION = '0.1.0';
-
 root.lettuce = Lettuce;
 
 
 /*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 *     Underscore may be freely distributed under the MIT license.
 */
-
 Lettuce.isObject = function (obj) {
     var type = typeof obj;
     return type === 'function' || type === 'object' && !!obj;
@@ -228,20 +224,9 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, event);
  * Inspired by John Resig's JavaScript Micro-Templating:
  * http://ejohn.org/blog/javascript-micro-templating/
  */
-
 /*jslint evil: true, regexp: true, unparam: true */
-/*global document */
-
 var Template = {
     regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,
-    encReg: /[<>&"'\x00]/g,
-    encMap: {
-        "<": "&lt;",
-        ">": "&gt;",
-        "&": "&amp;",
-        "\"": "&quot;",
-        "'": "&#39;"
-    },
     arg: "o",
     helper: ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
     ",include=function(s,d){_s+=tmpl(s,d);}",
@@ -308,24 +293,6 @@ var template = {
 };
 
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
-
-
-var SimpleView = new Lettuce.prototype.Class({});
-
-SimpleView.prototype.init = function () {
-
-};
-
-
-SimpleView.prototype.render = function (tmpl, id) {
-    document.getElementById(id).innerHTML = tmpl;
-};
-
-var simpleView = {
-    SimpleView: SimpleView
-};
-
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
 
 
 /*

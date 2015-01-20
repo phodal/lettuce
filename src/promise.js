@@ -3,7 +3,6 @@
  *  Licensed under the New BSD License.
  *  https://github.com/stackp/promisejs
  */
-
 function Promise() {
     this._callbacks = [];
 }
