@@ -13,19 +13,19 @@
 
 	var aboutPage = function(){
 		var aboutPage = new L.SimpleView();
-        var templates = l.tmpl("<h3>{%=o.about%}</h3>", data);
+        var templates = L.Template.tmpl("<h3>{%=o.about%}</h3>", data);
         return aboutPage.render(templates, "results");
     };
 
     var whyPage = function(){
         var whyPage = new L.SimpleView();
-        var templates = l.tmpl("<h3>{%=o.why%}</h3>", data);
+        var templates = L.Template.tmpl("<h3>{%=o.why%}</h3>", data);
         return whyPage.render(templates, "results");
     };
 
     var whatPage = function(){
         var whatPage = new L.SimpleView();
-        var templates = l.tmpl("<h3>{%=o.what%}</h3>", data);
+        var templates = L.Template.tmpl("<h3>{%=o.what%}</h3>", data);
         return whatPage.render(templates, "results");
     };
 

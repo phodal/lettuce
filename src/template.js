@@ -15,63 +15,68 @@
 /*jslint evil: true, regexp: true, unparam: true */
 /*global document */
 
-var tmpl = function (str, data) {
-    function compile() {
+var Template = {
+    regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,
+    encReg: /[<>&"'\x00]/g,
+    encMap: {
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    },
+    arg: "o",
+    helper: ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
+    ",include=function(s,d){_s+=tmpl(s,d);}",
+
+    tmpl: function (str, data){
+        var f = !/[^\w\-\.:]/.test(str) ? "" : this.compile(str);
+        return f(data, this);
+    },
+    compile: function (str) {
         var fn, variable;
-	    variable = tmpl.arg + ',tmpl';
-        fn = "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
-            str.replace(tmpl.regexp, tmpl.func) +
-            "';";
+        variable = this.arg + ',tmpl';
+        fn = "var _e=tmpl.encode" + this.helper + ",_s='" +
+        str.replace(this.regexp, this.func) +
+        "';";
         fn = fn + "return _s;";
         return new Function(variable, fn);
-    }
-
-    var f = !/[^\w\-\.:]/.test(str) ? "" : compile();
-    return f(data, tmpl);
-};
-
-tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
-tmpl.func = function (s, p1, p2, p3, p4, p5) {
-    if (p1) { // whitespace, quote and backspace in HTML context
-        return {
-                "\n": "\\n",
-                "\r": "\\r",
-                "\t": "\\t",
-                " " : " "
-            }[p1] || "\\" + p1;
-    }
-    if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
-        if (p2 === "=") {
-            return "'+_e(" + p3 + ")+'";
+    },
+    encode: function (s) {
+        /*jshint eqnull:true */
+        return (s == null ? "" : "" + s).replace(
+            this.encReg,
+            function (c) {
+                return this.encMap[c] || "";
+            }
+        );
+    },
+    func: function (s, p1, p2, p3, p4, p5) {
+        if (p1) { // whitespace, quote and backspace in HTML context
+            return {
+                    "\n": "\\n",
+                    "\r": "\\r",
+                    "\t": "\\t",
+                    " ": " "
+                }[p1] || "\\" + p1;
         }
-        return "'+(" + p3 + "==null?'':" + p3 + ")+'";
-    }
-    if (p4) { // evaluation start tag: {%
-        return "';";
-    }
-    if (p5) { // evaluation end tag: %}
-        return "_s+='";
-    }
-};
-tmpl.encReg = /[<>&"'\x00]/g;
-tmpl.encMap = {
-    "<"   : "&lt;",
-    ">"   : "&gt;",
-    "&"   : "&amp;",
-    "\""  : "&quot;",
-    "'"   : "&#39;"
-};
-tmpl.encode = function (s) {
-    /*jshint eqnull:true */
-    return (s == null ? "" : "" + s).replace(
-        tmpl.encReg,
-        function (c) {
-            return tmpl.encMap[c] || "";
+        if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+            if (p2 === "=") {
+                return "'+_e(" + p3 + ")+'";
+            }
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
         }
-    );
+        if (p4) { // evaluation start tag: {%
+            return "';";
+        }
+        if (p5) { // evaluation end tag: %}
+            return "_s+='";
+        }
+    }
 };
-tmpl.arg = "o";
-tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
-",include=function(s,d){_s+=tmpl(s,d);}";
 
-Lettuce.prototype.tmpl = Lettuce.tmpl = tmpl;
+var template = {
+    Template: Template
+};
+
+Lettuce.prototype.tmpl = Lettuce.extend(Lettuce.prototype, template);
