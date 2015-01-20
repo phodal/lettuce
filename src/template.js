@@ -36,9 +36,7 @@ var Template = {
     compile: function (str) {
         var fn, variable;
         variable = this.arg + ',tmpl';
-        fn = "var _e=tmpl.encode" + this.helper + ",_s='" +
-        str.replace(this.regexp, this.func) +
-        "';";
+        fn = "var _e=tmpl.encode" + this.helper + ",_s='" + str.replace(this.regexp, this.func) + "';";
         fn = fn + "return _s;";
         return new Function(variable, fn);
     },
