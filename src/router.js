@@ -33,14 +33,19 @@ var Router = {
     },
 
     load: function () {
-        var self = this;
+        var self, checkUrl;
+        self = this;
+
+        checkUrl = function () {
+            self.check(self);
+        };
 
         function addEventListener() {
             if (window.addEventListener) {
-                window.addEventListener("hashchange", self.check(self), false);
+                window.addEventListener("hashchange", checkUrl, false);
             }
             else if (window.attachEvent) {
-                window.attachEvent("onhashchange", self.check(self));
+                window.attachEvent("onhashchange", checkUrl);
             }
         }
 
