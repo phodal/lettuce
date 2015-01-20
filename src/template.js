@@ -11,9 +11,20 @@
  * Inspired by John Resig's JavaScript Micro-Templating:
  * http://ejohn.org/blog/javascript-micro-templating/
  */
+
 /*jslint evil: true, regexp: true, unparam: true */
+/*global document */
+
 var Template = {
     regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,
+    encReg: /[<>&"'\x00]/g,
+    encMap: {
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    },
     arg: "o",
     helper: ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
     ",include=function(s,d){_s+=tmpl(s,d);}",
