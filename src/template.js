@@ -33,6 +33,7 @@ var Template = {
         var f = !/[^\w\-\.:]/.test(str) ? "" : this.compile(str);
         return f(data, this);
     },
+
     compile: function (str) {
         var fn, variable;
         variable = this.arg + ',tmpl';
@@ -40,29 +41,35 @@ var Template = {
         fn = fn + "return _s;";
         return new Function(variable, fn);
     },
+
     encode: function (s) {
         /*jshint eqnull:true */
+	    var encodeRegex = /[<>&"'\x00]/g,
+            encodeMap = {
+                "<": "&lt;",
+                ">": "&gt;",
+                "&": "&amp;",
+                "\"": "&quot;",
+                "'": "&#39;"
+            };
         return (s == null ? "" : "" + s).replace(
-            /[<>&"'\x00]/g,
+            encodeRegex,
             function (c) {
-                return {
-                        "<": "&lt;",
-                        ">": "&gt;",
-                        "&": "&amp;",
-                        "\"": "&quot;",
-                        "'": "&#39;"
-                    }[c] || "";
+                return encodeMap[c] || "";
             }
         );
     },
+    
     func: function (s, p1, p2, p3, p4, p5) {
+        var specialCharMAP = {
+            "\n": "\\n",
+            "\r": "\\r",
+            "\t": "\\t",
+            " ": " "
+        };
+
         if (p1) { // whitespace, quote and backspace in HTML context
-            return {
-                    "\n": "\\n",
-                    "\r": "\\r",
-                    "\t": "\\t",
-                    " ": " "
-                }[p1] || "\\" + p1;
+            return specialCharMAP[p1] || "\\" + p1;
         }
         if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
             if (p2 === "=") {
