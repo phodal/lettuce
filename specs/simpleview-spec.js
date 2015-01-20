@@ -15,10 +15,10 @@ describe("SimpleView", function() {
             why: "this is why"
         };
 
-        spyOn(lettuce, "tmpl");
+        spyOn(Lettuce.Template, "tmpl");
         var why = new Lettuce.SimpleView();
-        var templates = lettuce.tmpl("<h3>{%=o.why%}</h3>", data);
+        var templates = Lettuce.Template.tmpl("<h3>{%=o.why%}</h3>", data);
         why.render(templates, "results");
-        expect(lettuce.tmpl).toHaveBeenCalled();
+        expect(Lettuce.Template.tmpl).toHaveBeenCalled();
     });
 });

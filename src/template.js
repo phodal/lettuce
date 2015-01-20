@@ -36,18 +36,26 @@ var Template = {
     compile: function (str) {
         var fn, variable;
         variable = this.arg + ',tmpl';
-        fn = "var _e=tmpl.encode" + this.helper + ",_s='" +
+        //fn = "console.log(o);console.log(tmpl);"; //debug mode
+        fn = fn + "var _e=tmpl.encode" + this.helper + ",_s='" +
         str.replace(this.regexp, this.func) +
         "';";
         fn = fn + "return _s;";
+        console.log(new Function(variable, fn));
         return new Function(variable, fn);
     },
     encode: function (s) {
         /*jshint eqnull:true */
         return (s == null ? "" : "" + s).replace(
-            this.encReg,
+            /[<>&"'\x00]/g,
             function (c) {
-                return this.encMap[c] || "";
+                return {
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        "&": "&amp;",
+                        "\"": "&quot;",
+                        "'": "&#39;"
+                    }[c] || "";
             }
         );
     },
