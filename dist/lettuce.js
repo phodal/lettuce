@@ -330,19 +330,14 @@ var Router = {
     },
 
     load: function () {
-        var self, checkUrl;
-        self = this;
-
-        checkUrl = function () {
-            self.check(self);
-        };
+        var self = this;
 
         function addEventListener() {
             if (window.addEventListener) {
-                window.addEventListener("hashchange", checkUrl, false);
+                window.addEventListener("hashchange", self.check(self), false);
             }
             else if (window.attachEvent) {
-                window.attachEvent("onhashchange", checkUrl);
+                window.attachEvent("onhashchange", self.check(self));
             }
         }
 
