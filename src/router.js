@@ -4,8 +4,6 @@
  */
 var Router = {
     routes: [],
-    mode: null,
-    root: '/',
     hashStrip: /^#*/,
     location: window.location,
 
