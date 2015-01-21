@@ -20,7 +20,7 @@ var data = {
     "title": "JavaScript Templates"
 };
 
-var result = L.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
+var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 ```
 
 ##Router
@@ -67,20 +67,27 @@ lettuce.get('/bower.json', function(result){
 ##Template with Router
 
 ```javascript
-var pageView = function(){};
-pageView.prototype = {
-    init:function(){
-        var result = L.tmpl("<h3>" + this.message + "</h3>", data);
-        document.getElementById("results").innerHTML = result;
-    }
+var aboutPage = function(){
+    var aboutPage = new L.SimpleView();
+    var templates = L.Template.tmpl("<h3>{%=o.about%}</h3>", data);
+    return aboutPage.render(templates, "results");
 };
 
-var about = new L.Class(pageView);
-about.prototype.message = data.about;
+var whyPage = function(){
+    var whyPage = new L.SimpleView();
+    var templates = L.Template.tmpl("<h3>{%=o.why%}</h3>", data);
+    return whyPage.render(templates, "results");
+};
 
-var what = new L.Class(pageView);
-what.prototype.message = data.what;
+var whatPage = function(){
+    var whatPage = new L.SimpleView();
+    var templates = L.Template.tmpl("<h3>{%=o.what%}</h3>", data);
+    return whatPage.render(templates, "results");
+};
 
-var why = new L.Class(pageView);
-why.prototype.message = data.why;
+L.Router
+    .add(/#about/, aboutPage)
+    .add(/#what/, whatPage)
+    .add(/#why/, whyPage)
+    .load();
 ```
