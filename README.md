@@ -2,7 +2,7 @@
 
 # Lettuce, Mobile Framework
 
-[![Build Status](https://api.travis-ci.org/phodal/lettuce.png)](https://travis-ci.org/phodal/lettuce)
+[![Build Status](https://travis-ci.org/phodal/lettuce.svg?branch=master)](https://travis-ci.org/phodal/lettuce)
 [![Version](http://img.shields.io/npm/v/lettuce.svg?style=flat)](http://http://img.shields.io/npm/v/lettuce.svg)
 [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
 [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
