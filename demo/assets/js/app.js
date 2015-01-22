@@ -8,17 +8,17 @@
     };
 
     var about = function () {
-        var result = L.tmpl("<h3>{%=o.about%}</h3>", data);
+        var result = L.Template.tmpl("<h3>{%=o.about%}</h3>", data);
         document.getElementById("results").innerHTML = result;
     };
 
     function what() {
-        var result = L.tmpl("<h3>{%=o.what%}</h3>", data);
+        var result = L.Template.tmpl("<h3>{%=o.what%}</h3>", data);
         document.getElementById("results").innerHTML = result;
     }
 
     function why() {
-        var result = L.tmpl("<h3>{%=o.why%}</h3>", data);
+        var result = L.Template.tmpl("<h3>{%=o.why%}</h3>", data);
         document.getElementById("results").innerHTML = result;
     }
 
