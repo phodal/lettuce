@@ -350,8 +350,12 @@ var Effect = {
     }
 };
 
+var effect = {
+    Effect: Effect
+};
 
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype, Effect);
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, effect);
 
 
 /*
