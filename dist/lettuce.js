@@ -7,13 +7,14 @@ var Lettuce = function() {
 
 };
 
-Lettuce.VERSION = '0.0.8';
+Lettuce.VERSION = '0.1.1';
 
 root.lettuce = Lettuce;
 
 
-//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
+/*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+*     Underscore may be freely distributed under the MIT license.
+*/
 
 Lettuce.isObject = function (obj) {
     var type = typeof obj;
@@ -92,11 +93,11 @@ Lettuce.prototype.Class = (function (prototype, ownProperty) {
         };
 
         var open = (Class.open = function (def) {
-            if (typeof def === 'function') {
+            if (Lettuce.isFunction(def)) {
                 def = def.call(Class, proto, _super, Class, _superclass);
             }
 
-            if (typeof def === 'object') {
+            if (Lettuce.isObject(def)) {
                 for (var key in def) {
                     if (ownProperty.call(def, key)) {
                         proto[key] = def[key];
@@ -131,17 +132,16 @@ Parser.prototype.init = function (options) {
 };
 
 Parser.prototype.run = function (methods) {
-    this.methods = methods;
-
-    this.execute(this.options.first);
-
-    for (var key in this.methods) {
-        if (key !== this.options.last && key.match(this.options.regex)) {
+    var self = this;
+    self.methods = methods;
+    self.execute(self.options.first);
+    for (var key in self.methods) {
+        if (key !== self.options.last && key.match(self.options.regex)) {
             this.execute(key);
         }
     }
 
-    this.execute(this.options.last);
+    self.execute(self.options.last);
 };
 
 Parser.prototype.execute = function (methodName) {
@@ -232,66 +232,82 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, event);
 /*jslint evil: true, regexp: true, unparam: true */
 /*global document */
 
-var tmpl = function (str, data) {
-    var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
-    tmpl(tmpl.load(str)) :
-        new Function(
-            tmpl.arg + ',tmpl',
-            "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
-            str.replace(tmpl.regexp, tmpl.func) +
-            "';return _s;"
-        );
-    return f(data, tmpl);
-};
-tmpl.cache = {};
-tmpl.load = function (id) {
-    return document.getElementById(id).innerHTML;
-};
-tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
-tmpl.func = function (s, p1, p2, p3, p4, p5) {
-    if (p1) { // whitespace, quote and backspace in HTML context
-        return {
-                "\n": "\\n",
-                "\r": "\\r",
-                "\t": "\\t",
-                " " : " "
-            }[p1] || "\\" + p1;
-    }
-    if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
-        if (p2 === "=") {
-            return "'+_e(" + p3 + ")+'";
-        }
-        return "'+(" + p3 + "==null?'':" + p3 + ")+'";
-    }
-    if (p4) { // evaluation start tag: {%
-        return "';";
-    }
-    if (p5) { // evaluation end tag: %}
-        return "_s+='";
-    }
-};
-tmpl.encReg = /[<>&"'\x00]/g;
-tmpl.encMap = {
-    "<"   : "&lt;",
-    ">"   : "&gt;",
-    "&"   : "&amp;",
-    "\""  : "&quot;",
-    "'"   : "&#39;"
-};
-tmpl.encode = function (s) {
-    /*jshint eqnull:true */
-    return (s == null ? "" : "" + s).replace(
-        tmpl.encReg,
-        function (c) {
-            return tmpl.encMap[c] || "";
-        }
-    );
-};
-tmpl.arg = "o";
-tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
-",include=function(s,d){_s+=tmpl(s,d);}";
+var Template = {
+    regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,
+    encReg: /[<>&"'\x00]/g,
+    encMap: {
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    },
+    arg: "o",
+    helper: ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
+    ",include=function(s,d){_s+=tmpl(s,d);}",
 
-Lettuce.prototype.tmpl = Lettuce.tmpl = tmpl;
+    tmpl: function (str, data){
+        var f = !/[^\w\-\.:]/.test(str) ? "" : this.compile(str);
+        return f(data, this);
+    },
+
+    compile: function (str) {
+        var fn, variable;
+        variable = this.arg + ',tmpl';
+        fn = "var _e=tmpl.encode" + this.helper + ",_s='" + str.replace(this.regexp, this.func) + "';";
+        fn = fn + "return _s;";
+        return new Function(variable, fn);
+    },
+
+    encode: function (s) {
+        /*jshint eqnull:true */
+	    var encodeRegex = /[<>&"'\x00]/g,
+            encodeMap = {
+                "<": "&lt;",
+                ">": "&gt;",
+                "&": "&amp;",
+                "\"": "&quot;",
+                "'": "&#39;"
+            };
+        return (s == null ? "" : "" + s).replace(
+            encodeRegex,
+            function (c) {
+                return encodeMap[c] || "";
+            }
+        );
+    },
+
+    func: function (s, p1, p2, p3, p4, p5) {
+        var specialCharMAP = {
+            "\n": "\\n",
+            "\r": "\\r",
+            "\t": "\\t",
+            " ": " "
+        };
+
+        if (p1) { // whitespace, quote and backspace in HTML context
+            return specialCharMAP[p1] || "\\" + p1;
+        }
+        if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+            if (p2 === "=") {
+                return "'+_e(" + p3 + ")+'";
+            }
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
+        }
+        if (p4) { // evaluation start tag: {%
+            return "';";
+        }
+        if (p5) { // evaluation end tag: %}
+            return "_s+='";
+        }
+    }
+};
+
+var template = {
+    Template: Template
+};
+
+Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
 
 
 var SimpleView = new Lettuce.prototype.Class({});
@@ -302,7 +318,6 @@ SimpleView.prototype.init = function () {
 
 
 SimpleView.prototype.render = function (tmpl, id) {
-    //var result = Lettuce.tmpl("<h3>{%=o."+ type +"%}" + "</h3>", data);
     document.getElementById(id).innerHTML = tmpl;
 };
 
@@ -313,29 +328,30 @@ var simpleView = {
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
 
 
-//Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url & Backbone
+/*
+ *Inspired by http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url
+ *  Backbone
+ */
 var Router = {
     routes: [],
-    mode: null,
-    root: '/',
     hashStrip: /^#*/,
     location: window.location,
 
-    getFragment: function() {
+    getFragment: function () {
         return (this.location).hash.replace(this.hashStrip, '');
     },
 
-    add: function(regex, handler) {
-        if(Lettuce.isFunction(regex)) {
+    add: function (regex, handler) {
+        if (Lettuce.isFunction(regex)) {
             handler = regex;
             regex = '';
         }
-        this.routes.push({ regex: regex, handler: handler});
+        this.routes.push({regex: regex, handler: handler});
         return this;
     },
 
-    check: function (current, self) {
-        var fragment = current || self.getFragment();
+    check: function (self) {
+        var fragment = self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
             var newFragment = "#" + fragment;
             var match = newFragment.match(self.routes[i].regex);
@@ -346,25 +362,28 @@ var Router = {
         }
     },
 
-    load: function() {
-        var self, current, fn;
+    load: function () {
+        var self, checkUrl;
         self = this;
-        fn = function() {
-            current = self.getFragment();
-            if (current === self.getFragment()) {
-                self.check(current, self);
-            }
+
+        checkUrl = function () {
+            self.check(self);
         };
-        if (window.addEventListener) {
-            window.addEventListener("hashchange", fn, false);
+
+        function addEventListener() {
+            if (window.addEventListener) {
+                window.addEventListener("hashchange", checkUrl, false);
+            }
+            else if (window.attachEvent) {
+                window.attachEvent("onhashchange", checkUrl);
+            }
         }
-        else if (window.attachEvent) {
-            window.attachEvent("onhashchange", fn);
-        }
+
+        addEventListener();
         return this;
     },
 
-    navigate: function(path) {
+    navigate: function (path) {
         path = path ? path : '';
         this.location.href.match(/#(.*)$/);
         this.location.href = this.location.href.replace(/#(.*)$/, '') + '#' + path;
