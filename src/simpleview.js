@@ -1,12 +1,9 @@
 var SimpleView = new Lettuce.prototype.Class({});
 
-SimpleView.prototype.init = function () {
+SimpleView.prototype.init = function () {};
 
-};
-
-
-SimpleView.prototype.render = function (tmpl, id) {
-    document.getElementById(id).innerHTML = tmpl;
+SimpleView.prototype.render = function (template, elementId) {
+    document.getElementById(elementId).innerHTML = template;
 };
 
 var simpleView = {
