@@ -20,4 +20,29 @@ describe("Effect", function () {
         expect(height).toEqual('400px');
     });
 
+    it('should be able fadein elements', function () {
+        content = document.createElement('div');
+        content.setAttribute("id", elementID);
+        document.body.appendChild(content);
+        document.getElementById(elementID).style.height = '4px';
+        document.getElementById(elementID).style.opacity = 1;
+
+        L.FX.fadeIn(document.getElementById(elementID), {duration: 100, complete: function() {
+            var opacity = document.getElementById(elementID).style.opacity;
+            expect(opacity).toEqual(0);
+        }});
+    });
+
+    it('should be able fadeout elements', function () {
+        content = document.createElement('div');
+        content.setAttribute("id", elementID);
+        document.body.appendChild(content);
+        document.getElementById(elementID).style.height = '4px';
+        document.getElementById(elementID).style.opacity = 0;
+
+        L.FX.fadeOut(document.getElementById(elementID), {duration: 100, complete: function() {
+            var opacity = document.getElementById(elementID).style.opacity;
+            expect(opacity).toEqual(1);
+        }});
+    });
 });
