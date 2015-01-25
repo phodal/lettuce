@@ -85,7 +85,8 @@ describe("Effect", function () {
         it('elastic: should return it self', function () {
             var origin = 2, now;
             now = L.FX.easing.elastic(origin, origin);
-            expect(now).toEqual(-512.0000000000014);
+            now = Math.round(now);
+            expect(now).toEqual(-512);
         });
     });
 });
