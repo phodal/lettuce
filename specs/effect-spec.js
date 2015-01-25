@@ -27,10 +27,12 @@ describe("Effect", function () {
         document.getElementById(elementID).style.height = '4px';
         document.getElementById(elementID).style.opacity = 1;
 
-        L.FX.fadeIn(document.getElementById(elementID), {duration: 100, complete: function() {
-            var opacity = document.getElementById(elementID).style.opacity;
-            expect(opacity).toEqual(0);
-        }});
+        L.FX.fadeIn(document.getElementById(elementID), {duration: 2000, complete: function() {}});
+
+        jasmine.clock().tick(2000);
+        var opacity = document.getElementById(elementID).style.opacity;
+        opacity = Math.round(opacity);
+        expect(opacity).toEqual(0);
     });
 
     it('should be able fadeout elements', function () {
@@ -40,10 +42,12 @@ describe("Effect", function () {
         document.getElementById(elementID).style.height = '4px';
         document.getElementById(elementID).style.opacity = 0;
 
-        L.FX.fadeOut(document.getElementById(elementID), {duration: 100, complete: function() {
-            var opacity = document.getElementById(elementID).style.opacity;
-            expect(opacity).toEqual(1);
-        }});
+        L.FX.fadeOut(document.getElementById(elementID), {duration: 2000, complete: function() {}});
+
+        jasmine.clock().tick(2000);
+        var opacity = document.getElementById(elementID).style.opacity;
+        opacity = Math.round(opacity);
+        expect(opacity).toEqual(1);
     });
 
     describe("Effect Easing", function () {
