@@ -57,7 +57,7 @@ L.Router
     .add(/#why/, why)
     .load();
 ```
-##展示
+##Exhibition
 
 [http://valentine.phodal.com/](http://valentine.phodal.com/)
 
