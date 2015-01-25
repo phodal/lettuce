@@ -45,4 +45,42 @@ describe("Effect", function () {
             expect(opacity).toEqual(1);
         }});
     });
+
+    describe("Effect Easing", function () {
+        it('linear: should return it self', function () {
+            var origin = 1, now;
+            now = L.FX.easing.linear(origin);
+            expect(now).toEqual(1);
+        });
+
+        it('quadratic: should return it self', function () {
+            var origin = 2, now;
+            now = L.FX.easing.quadratic(origin);
+            expect(now).toEqual(4);
+        });
+
+        it('circ: should return it self', function () {
+            var origin = 1.0, now;
+            now = L.FX.easing.circ(origin);
+            expect(now).toEqual(1);
+        });
+
+        it('back: should return it self', function () {
+            var origin = 2, now;
+            now = L.FX.easing.back(origin, origin);
+            expect(now).toEqual(16);
+        });
+
+        it('bounce: should return it self', function () {
+            var origin = 2, now;
+            now = L.FX.easing.bounce(origin);
+            expect(now).toEqual(-6.5625);
+        });
+
+        it('elastic: should return it self', function () {
+            var origin = 2, now;
+            now = L.FX.easing.elastic(origin, origin);
+            expect(now).toEqual(-512.0000000000014);
+        });
+    });
 });
