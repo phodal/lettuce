@@ -15,8 +15,9 @@ describe("Effect", function () {
         document.getElementById(elementID).style.height = '4px';
 
         L.Effect.slideDown(document.getElementById(elementID), 10 ,400);
+        jasmine.clock().tick(2000);
+
         height = document.getElementById(elementID).style.height;
-        jasmine.clock().tick(1000);
         expect(height).toEqual('400px');
     });
 
