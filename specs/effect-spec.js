@@ -1,7 +1,7 @@
 'use strict';
 
 describe("Effect", function () {
-    var L, content, height,elementID = "content";
+    var L, content, height, elementID = "content";
 
     beforeEach(function () {
         L = new lettuce();
@@ -15,7 +15,10 @@ describe("Effect", function () {
         document.getElementById(elementID).style.height = '4px';
         document.getElementById(elementID).style.opacity = 1;
 
-        L.FX.fadeIn(document.getElementById(elementID), {duration: 2000, complete: function() {}});
+        L.FX.fadeIn(document.getElementById(elementID), {
+            duration: 2000, complete: function () {
+            }
+        });
 
         jasmine.clock().tick(2000);
         var opacity = document.getElementById(elementID).style.opacity;
@@ -30,12 +33,43 @@ describe("Effect", function () {
         document.getElementById(elementID).style.height = '4px';
         document.getElementById(elementID).style.opacity = 0;
 
-        L.FX.fadeOut(document.getElementById(elementID), {duration: 2000, complete: function() {}});
+        L.FX.fadeOut(document.getElementById(elementID), {
+            duration: 2000, complete: function () {
+            }
+        });
 
         jasmine.clock().tick(2000);
         var opacity = document.getElementById(elementID).style.opacity;
         opacity = Math.round(opacity);
         expect(opacity).toEqual(1);
+    });
+
+    describe(" Animation", function(){
+        it('should return progress equal 1', function () {
+            var to = 2, progress, that = this;
+            var options = {
+                duration: 0.2, complete: function () {
+                }
+            };
+            var element = document.createElement('div');
+            element.setAttribute("id", elementID);
+            document.body.appendChild(content);
+            document.getElementById(elementID).style.height = '4px';
+            document.getElementById(elementID).style.opacity = 0;
+
+            L.FX.animate({
+                duration: options.duration,
+                delta: function (progress) {
+                    progress = this.progress;
+                    var prog = L.FX.easing.linear(progress);
+                    return prog;
+                },
+                complete: options.complete,
+                step: function (delta) {
+                    element.style.opacity = to - delta;
+                }
+            });
+        });
     });
 
     describe("Effect Easing", function () {
