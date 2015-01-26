@@ -10,9 +10,9 @@
 Lettuce is a Small & Powerful Framework for Romantic.
 Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
 
-##Example
+##Usage(用法)
 
-##Class
+##Class(类)
 
 ```javascript
 var L = new lettuce();
@@ -22,7 +22,7 @@ var zero = function(){
 var sub = new L.Class(zero);
 ```
 
-##Template
+##Template(模板)
 
 ```javascript
 var L = new lettuce();
@@ -33,7 +33,7 @@ var data = {
 var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 ```
 
-##Router
+##Router(路由)
 
 ```javascript
 var L = new lettuce();
@@ -74,7 +74,7 @@ lettuce.post("http://127.0.0.1:5000/some", "something", function(data){
 })
 ```
 
-##Single Page Application Example
+##Single Page Application Example(单页面应用)
 
 1.new a instance
 
