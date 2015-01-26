@@ -8,19 +8,6 @@ describe("Effect", function () {
         jasmine.clock().install();
     });
 
-    it('should able slide down content', function () {
-        content = document.createElement('div');
-        content.setAttribute("id", elementID);
-        document.body.appendChild(content);
-        document.getElementById(elementID).style.height = '4px';
-
-        L.Effect.slideDown(document.getElementById(elementID), 10 ,400);
-        jasmine.clock().tick(2000);
-
-        height = document.getElementById(elementID).style.height;
-        expect(height).toEqual('400px');
-    });
-
     it('should be able fadein elements', function () {
         content = document.createElement('div');
         content.setAttribute("id", elementID);
