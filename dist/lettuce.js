@@ -154,14 +154,18 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, parser);
 
 
 Lettuce.get = function (url, callback) {
-    Lettuce.send(url, 'GET', callback);
+    Lettuce.ajax(url, 'GET', callback);
+};
+
+Lettuce.load = function (url, callback) {
+    Lettuce.ajax(url, 'GET', callback);
 };
 
 Lettuce.post = function (url, data, callback) {
-    Lettuce.send(url, 'POST', callback, data);
+    Lettuce.ajax(url, 'POST', callback, data);
 };
 
-Lettuce.send = function (url, method, callback, data) {
+Lettuce.ajax = function (url, method, callback, data) {
     data = data || null;
     var request = new XMLHttpRequest();
     if (callback instanceof Function) {
