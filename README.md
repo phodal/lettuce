@@ -9,6 +9,10 @@
 ![Lettuce](./docs/lettuce.png)
 
 # Lettuce, Mobile Framework for romantic
+ 
+Lettuce is a Small & Powerful Framework for Romantic.
+Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
+
 
 > Lettuce 是一个轻巧的移动开发框架。
 
@@ -23,14 +27,9 @@
 
  - 官网: [http://lettuce.phodal.com/](http://lettuce.phodal.com/)
 
+##Lettuce Usage(用法)
 
- 
-Lettuce is a Small & Powerful Framework for Romantic.
-Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
-
-##Usage(用法)
-
-##Class(类)
+###Class(类)
 
 ```javascript
 var L = new lettuce();
@@ -40,7 +39,7 @@ var zero = function(){
 var sub = new L.Class(zero);
 ```
 
-##Template(模板)
+###Template(模板)
 
 ```javascript
 var L = new lettuce();
@@ -51,7 +50,7 @@ var data = {
 var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 ```
 
-##Router(路由)
+###Router(路由)
 
 ```javascript
 var L = new lettuce();
@@ -63,27 +62,27 @@ var check = L.Router
             .load();;
 ```
 
-##Effect(效果)
+###Effect(效果)
 
-###淡出
+####淡出
 
-```
+```javascript
 L.FX.fadeOut(document.getElementById('content'), {
     duration: 2000, complete: function () {
     }
 });
 ```
 
-###淡入
+####淡入
 
-```
+```javascript
 L.FX.fadeIn(document.getElementById('content'), {
     duration: 2000, complete: function () {
     }
 });
 ```
 
-##Promise
+###Promise
 
 ```javascript
 function late(n) {
@@ -97,7 +96,7 @@ late(100).then(
 ).done();
 ```
 
-##Ajax
+###Ajax
 
 ```javascript
 lettuce.get('/bower.json', function(result){
@@ -137,17 +136,10 @@ var aboutPage = function(){
     var templates = L.Template.tmpl("<h3>{%=o.about%}</h3>", data);
     return aboutPage.render(templates, "results");
 };
-
 var whyPage = function(){
     var whyPage = new L.SimpleView();
     var templates = L.Template.tmpl("<h3>{%=o.why%}</h3>", data);
     return whyPage.render(templates, "results");
-};
-
-var whatPage = function(){
-    var whatPage = new L.SimpleView();
-    var templates = L.Template.tmpl("<h3>{%=o.what%}</h3>", data);
-    return whatPage.render(templates, "results");
 };
 ```
 
@@ -156,12 +148,11 @@ var whatPage = function(){
 ```javascript
 L.Router
     .add(/#about/, about)
-    .add(/#what/, what)
     .add(/#why/, why)
     .load();
 ```
 
-##Process
+##Process(进程)
 
 ###Done
 
@@ -171,11 +162,11 @@ L.Router
 - Class
 - Promise
 - Event
+- Effect
 
 ###On Going
 
 - View
-
 
 ###Todo
 
