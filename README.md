@@ -12,6 +12,70 @@ Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/
 
 ##Example
 
+##Class
+
+```javascript
+var L = new lettuce();
+var zero = function(){
+
+};
+var sub = new L.Class(zero);
+```
+
+##Template
+
+```javascript
+var L = new lettuce();
+var data = {
+    "title": "JavaScript Templates"
+};
+
+var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
+```
+
+##Router
+
+```javascript
+var L = new lettuce();
+
+var check = L.Router
+            .add(/#about/,log)
+            .add(/#what/, log)
+            .add(/#why/, log)
+            .load();;
+```
+
+##Promise
+
+```javascript
+function late(n) {
+    var L = new lettuce();
+    var p = new L.Promise();
+    return p;
+}
+
+late(100).then(
+).then(
+).done();
+```
+
+##Ajax
+
+```javascript
+lettuce.get('/bower.json', function(result){
+    equal(result["name"], "lettuce");
+    done();
+})
+```
+
+```javascript
+lettuce.post("http://127.0.0.1:5000/some", "something", function(data){
+    console.log(data)
+})
+```
+
+##Single Page Application Example
+
 1.new a instance
 
 ```javascript
@@ -57,7 +121,8 @@ L.Router
     .add(/#why/, why)
     .load();
 ```
-##Exhibition
+
+##Gallery
 
 [http://valentine.phodal.com/](http://valentine.phodal.com/)
 
