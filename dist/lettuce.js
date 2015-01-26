@@ -230,7 +230,6 @@ Lettuce.prototype = Lettuce.extend(Lettuce.prototype, event);
  */
 
 /*jslint evil: true, regexp: true, unparam: true */
-/*global document */
 
 var Template = {
     regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,
@@ -308,21 +307,6 @@ var template = {
 };
 
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
-
-
-var SimpleView = new Lettuce.prototype.Class({});
-
-SimpleView.prototype.init = function () {};
-
-SimpleView.prototype.render = function (template, elementId) {
-    document.getElementById(elementId).innerHTML = template;
-};
-
-var simpleView = {
-    SimpleView: SimpleView
-};
-
-Lettuce.prototype = Lettuce.extend(Lettuce.prototype, simpleView);
 
 
 /*

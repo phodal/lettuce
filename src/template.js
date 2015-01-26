@@ -13,7 +13,6 @@
  */
 
 /*jslint evil: true, regexp: true, unparam: true */
-/*global document */
 
 var Template = {
     regexp: /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g,

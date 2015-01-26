@@ -50,7 +50,7 @@ module.exports = function (grunt) {
                     'src/ajax.js',
                     'src/event.js',
                     'src/template.js',
-                    'src/simpleview.js',
+                    //'src/simpleview.js',
                     'src/promise.js',
                     'src/effect.js',
                     'src/router.js',
