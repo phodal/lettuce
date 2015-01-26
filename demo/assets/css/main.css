@@ -106,3 +106,11 @@ ul.nav li {
     display: inline-block;
     vertical-align: middle;
 }
+
+header {
+    background: #5eb95e;
+}
+
+footer {
+    background: #1f8dd6;
+}
