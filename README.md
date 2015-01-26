@@ -1,16 +1,30 @@
-![Lettuce](./docs/lettuce.png)
-
-# Lettuce, Mobile Framework
-
 [![Build Status](https://travis-ci.org/phodal/lettuce.svg?branch=master)](https://travis-ci.org/phodal/lettuce)
 [![Version](http://img.shields.io/npm/v/lettuce.svg?style=flat)](http://http://img.shields.io/npm/v/lettuce.svg)
 [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
 [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
-
 [![Node](https://img.shields.io/node/v/gh-badges.svg?style=flat)]()
 [![npm](https://img.shields.io/npm/dm/lettuce.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
 
+![Lettuce](./docs/lettuce.png)
+
+# Lettuce, Mobile Framework for romantic
+
+> Lettuce 是一个轻巧的移动开发框架。
+
+用途: ``Romantic``，``前端学习``
+
+
+##Gallery(展示)
+
+应用场景
+
+ - 一个情人节礼物: [http://valentine.phodal.com/](http://valentine.phodal.com/)
+
+ - 官网: [http://lettuce.phodal.com/](http://lettuce.phodal.com/)
+
+
+ 
 Lettuce is a Small & Powerful Framework for Romantic.
 Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
 
@@ -136,6 +150,7 @@ var whatPage = function(){
     return whatPage.render(templates, "results");
 };
 ```
+
 4.Add router
 
 ```javascript
@@ -145,12 +160,6 @@ L.Router
     .add(/#why/, why)
     .load();
 ```
-
-##Gallery
-
-[http://valentine.phodal.com/](http://valentine.phodal.com/)
-
-[http://lettuce.phodal.com/](http://lettuce.phodal.com/)
 
 ##Process
 
