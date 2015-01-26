@@ -1,0 +1,35 @@
+{
+  "name": "lettuce",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/phodal/lettuce.svg?branch=master)](https://travis-ci.org/phodal/lettuce) [![Version](http://img.shields.io/npm/v/lettuce.svg?style=flat)](http://http://img.shields.io/npm/v/lettuce.svg) [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce) [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce) [![Node](https://img.shields.io/node/v/gh-badges.svg?style=flat)]() [![npm](https://img.shields.io/npm/dm/lettuce.svg?style=flat)]() [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-newer": "^0.5.0",
+    "gulp-sass": "^1.3.2",
+    "gulp-util": "^3.0.2",
+    "lodash": "^2.4.1",
+    "path": "^0.11.14",
+    "run-sequence": "^1.0.2",
+    "through": "^2.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phodal/lettuce.git"
+  },
+  "author": "OwenYang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phodal/lettuce/issues"
+  },
+  "homepage": "https://github.com/phodal/lettuce"
+}
