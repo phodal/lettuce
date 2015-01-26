@@ -3,11 +3,9 @@
   'use strict';
 
 
-var Lettuce = function() {
+var Lettuce = function() {};
 
-};
-
-Lettuce.VERSION = '0.2.0';
+Lettuce.VERSION = '0.2.1';
 
 root.lettuce = Lettuce;
 

@@ -1,6 +1,4 @@
-var Lettuce = function() {
-
-};
+var Lettuce = function() {};
 
 Lettuce.VERSION = '@@version';
 
