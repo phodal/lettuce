@@ -7,6 +7,10 @@
 [![Code Climate](https://codeclimate.com/github/phodal/lettuce/badges/gpa.svg)](https://codeclimate.com/github/phodal/lettuce)
 [![Test Coverage](https://codeclimate.com/github/phodal/lettuce/badges/coverage.svg)](https://codeclimate.com/github/phodal/lettuce)
 
+[![Node](https://img.shields.io/node/v/gh-badges.svg?style=flat)]()
+[![npm](https://img.shields.io/npm/dm/lettuce.svg?style=flat)]()
+[![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
+
 Lettuce is a Small & Powerful Framework for Romantic.
 Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
 
