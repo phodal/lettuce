@@ -45,6 +45,26 @@ var check = L.Router
             .load();;
 ```
 
+##Effect(效果)
+
+###淡出
+
+```
+L.FX.fadeOut(document.getElementById('content'), {
+    duration: 2000, complete: function () {
+    }
+});
+```
+
+###淡入
+
+```
+L.FX.fadeIn(document.getElementById('content'), {
+    duration: 2000, complete: function () {
+    }
+});
+```
+
 ##Promise
 
 ```javascript
