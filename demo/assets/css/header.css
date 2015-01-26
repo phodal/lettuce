@@ -1,13 +1,14 @@
 .header {
     z-index: 1;
     background: #242424;
+    position: relative;
     left: 0;
     right: 0;
     top: 0;
-    position: relative;
+    margin-left: -160px;
     padding-bottom: 0;
     overflow: hidden;
-    height: 69px;
+    height: 70px;
 }
 
 .header__nav {
