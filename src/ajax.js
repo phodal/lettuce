@@ -2,10 +2,6 @@ Lettuce.get = function (url, callback) {
     Lettuce.send(url, 'GET', callback);
 };
 
-Lettuce.load = function (url, callback) {
-    Lettuce.send(url, 'GET', callback);
-};
-
 Lettuce.post = function (url, data, callback) {
     Lettuce.send(url, 'POST', callback, data);
 };
