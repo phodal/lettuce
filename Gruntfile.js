@@ -18,7 +18,7 @@ module.exports = function (grunt) {
                 host: "http://0.0.0.0:8000",
                 vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js'],
                 specs : 'specs/*-spec.js',
-                template: require('grunt-template-jasmine-istanbul'),
+//                template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {
                     coverage: 'coverage/coverage.json',
                     report: {
