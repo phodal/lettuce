@@ -1,6 +1,20 @@
 (function (l) {
     var L = new l();
 
+    var SimpleView = new lettuce.prototype.Class({});
+
+    SimpleView.prototype.init = function () {};
+
+    SimpleView.prototype.render = function (template, elementId) {
+        document.getElementById(elementId).innerHTML = template;
+    };
+
+    var simpleView = {
+        SimpleView: SimpleView
+    };
+
+    lettuce.prototype = lettuce.extend(lettuce.prototype, simpleView);
+
     var data = {
         about: "This about A Mobile Framework For Romantic",
         what: "A Framework",
