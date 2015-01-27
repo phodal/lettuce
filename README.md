@@ -11,7 +11,8 @@
 # Lettuce, Mobile Framework for romantic
  
 Lettuce is a Small & Powerful Framework for Romantic.
-Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
+
+Online demo [http://lettuce.phodal.com/](http://lettuce.phodal.com/).
 
 
 > Lettuce 是一个轻巧的移动开发框架。
