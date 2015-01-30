@@ -1,6 +1,6 @@
 {
     "name": "lettuce",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Lettuce JS, Mini Mobile Framework for Romantic with DSL.",
     "main": "dist/lettuce.js",
     "scripts": {
