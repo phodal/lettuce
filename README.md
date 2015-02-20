@@ -48,7 +48,7 @@ var data = {
     "title": "JavaScript Templates"
 };
 
-var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
+var result = L.Template.tmpl("<h3>{%=o.title%}</h3>", data);
 ```
 
 ###Router(路由)
