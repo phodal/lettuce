@@ -1,4 +1,20 @@
-(function(root, undefined) {
+/*global define */
+(function(global, factory) {
+    "use strict";
+    if (typeof module === "object" && typeof module.exports === "object") {
+        module.exports = global.document ?
+            factory(global, true) :
+            function(w) {
+                if (!w.document) {
+                    throw new Error("jQuery requires a window with a document");
+                }
+                return factory(w);
+            };
+    } else {
+        factory(global);
+    }
+
+}(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
 
   'use strict';
 
@@ -7,7 +23,7 @@ var Lettuce = function() {};
 
 Lettuce.VERSION = '0.2.2';
 
-root.lettuce = Lettuce;
+window.lettuce = Lettuce;
 
 
 /*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -505,4 +521,15 @@ var router = {
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, router);
 
 
-}(this));
+if (typeof define === "function" && define.amd) {
+    define("lettuce", [], function () {
+        return Lettuce;
+    });
+}
+var strundefined = typeof undefined;
+if (typeof noGlobal === strundefined) {
+    window.Lettuce = Lettuce;
+}
+return Lettuce;
+}));
+
