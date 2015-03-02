@@ -21,7 +21,7 @@
 
 var Lettuce = function() {};
 
-Lettuce.VERSION = '0.2.2';
+Lettuce.VERSION = '0.2.3';
 
 window.lettuce = Lettuce;
 
