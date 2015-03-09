@@ -126,12 +126,14 @@ require.config({
 ```
 
 ``App.js``
+
+```javascritp
 define(['lettuce'],
   function (Lettuce) {
     var lettuce = new Lettuce();
   };
 });    
-``
+```
 
 ##Single Page Application Example(单页面应用)
 
