@@ -112,6 +112,27 @@ lettuce.post("http://127.0.0.1:5000/some", "something", function(data){
 })
 ```
 
+###AMD
+
+``RequireJS Config``
+
+```javascript
+require.config({
+  baseUrl: 'app',
+  paths: {
+    lettuce: 'lib/lettuce'
+  }
+});
+```
+
+``App.js``
+define(['lettuce'],
+  function (Lettuce) {
+    var lettuce = new Lettuce();
+  };
+});    
+``
+
 ##Single Page Application Example(单页面应用)
 
 1.new a instance
