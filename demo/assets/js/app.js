@@ -33,6 +33,4 @@
         .add(/#why/, why)
         .load();
 
-    console.log(L.Router.routes);
-
 }(lettuce));
