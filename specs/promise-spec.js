@@ -5,6 +5,7 @@ describe("Promise", function () {
 
     beforeEach(function () {
         L = new lettuce();
+        jasmine.clock().uninstall();
         jasmine.clock().install();
     });
 
