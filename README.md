@@ -11,21 +11,8 @@
 #Lettuce, Mobile Framework for romantic#
  
 Lettuce is a Small & Powerful Framework for Romantic.
-Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/).
 
-
-> Lettuce 是一个轻巧的移动开发框架。
-
-用途: ``Romantic``，``前端学习``
-
-
-##Gallery(展示)##
-
-应用场景
-
- - 一个情人节礼物: [http://valentine.phodal.com/](http://valentine.phodal.com/)
-
- - 官网: [http://lettuce.phodal.com/](http://lettuce.phodal.com/)
+> Lettuce 是一个轻巧的移动开发学习框架。
 
 ##Lettuce Usage(用法)##
 
@@ -33,9 +20,7 @@ Online demo [http://phodal.github.io/lettuce](http://phodal.github.io/lettuce/#/
 
 ```javascript
 var L = new lettuce();
-var zero = function(){
-
-};
+var zero = function(){};
 var sub = new L.Class(zero);
 ```
 
@@ -46,7 +31,6 @@ var L = new lettuce();
 var data = {
     "title": "JavaScript Templates"
 };
-
 var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 ```
 
@@ -54,7 +38,6 @@ var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 
 ```javascript
 var L = new lettuce();
-
 var check = L.Router
             .add(/#about/,log)
             .add(/#what/, log)
@@ -90,7 +73,6 @@ function late(n) {
     var p = new L.Promise();
     return p;
 }
-
 late(100).then(
 ).then(
 ).done();
@@ -175,21 +157,10 @@ L.Router
     .load();
 ```
 
-##Process##
+##ShowCase##
 
-###Done###
-
-- Template
-- Router
-- Ajax
-- Class
-- Promise
-- Event
-- Effect
-
-###On Going###
-
-- View
+- 一个情人节礼物: [http://valentine.phodal.com/](http://valentine.phodal.com/)
+- 官网: [http://lettuce.phodal.com/](http://lettuce.phodal.com/)
 
 ##License##
 
