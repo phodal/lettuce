@@ -53,6 +53,5 @@
     L.Event.on('tick', function (results) {
         console.log(results);
     });
-    console.log(L.Router.routes)
 
 }(lettuce));

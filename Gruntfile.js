@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                     thresholds: {
                         lines: 90,
                         statements: 90,
-                        branches: 70,
+                        branches: 60,
                         functions: 85
                     }
                 }
@@ -44,6 +44,7 @@ module.exports = function (grunt) {
                 src: [
                     'src/_intro.js',
                     'src/main.js',
+                    'src/dom.js',
                     'src/helpers.js',
                     'src/class.js',
                     'src/parser.js',
