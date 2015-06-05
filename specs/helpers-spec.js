@@ -8,6 +8,13 @@ describe("Helper", function () {
         expect(l.isObject([{}])).toEqual(true);
     });
 
+    it("should be a function", function () {
+        var func = function () {};
+
+        expect(l.isFunction(func)).toEqual(true);
+        expect(l.isFunction("")).toEqual(false);
+    });
+    
     describe("Extend", function () {
         it("should be able to extend object", function () {
             expect(l.extend({one: 1}, {two: 2})).toEqual({one: 1, two: 2});
