@@ -1,12 +1,15 @@
 'use strict';
 
 describe("Effect", function () {
-    var L, content, height, elementID = "content";
+    var L, content, elementID = "content";
 
     beforeEach(function () {
         L = new lettuce();
-        jasmine.clock().uninstall();
         jasmine.clock().install();
+    });
+
+    afterEach(function(){
+        jasmine.clock().uninstall();
     });
 
     it('should be able fadein elements', function () {
