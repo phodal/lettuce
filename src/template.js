@@ -38,7 +38,7 @@ var Template = {
         variable = this.arg + ',tmpl';
         fn = "var _e=tmpl.encode" + this.helper + ",_s='" + str.replace(this.regexp, this.func) + "';";
         fn = fn + "return _s;";
-        return new Function(variable, fn);
+        return new Function(variable, fn);     // 这种原型构造函数对象真的好吗？ 感觉可读性有点差了， 什么情况下才用这种方式 ？
     },
 
     encode: function (s) {
@@ -90,3 +90,5 @@ var template = {
 };
 
 Lettuce.prototype = Lettuce.extend(Lettuce.prototype, template);
+
+

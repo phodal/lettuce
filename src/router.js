@@ -8,7 +8,8 @@ var Router = {
     location: window.location,
 
     getFragment: function () {
-        return (this.location).hash.replace(this.hashStrip, '');
+        //return (this.location).hash.replace(this.hashStrip, '');
+        return (this.location).hash;
     },
 
     add: function (regex, handler) {
@@ -23,11 +24,11 @@ var Router = {
     check: function (self) {
         var fragment = self.getFragment();
         for (var i = 0; i < self.routes.length; i++) {
-            var newFragment = "#" + fragment;
-            var match = newFragment.match(self.routes[i].regex);
+            //var newFragment = "#" + fragment;
+            var match = getFragment.match(self.routes[i].regex);
             if (match) {
-                match.shift();
-                self.routes[i].handler.apply({}, match);
+                //match.shift();
+                self.routes[i].handler.apply({});
             }
         }
     },

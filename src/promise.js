@@ -13,15 +13,16 @@ Promise.prototype.then = function(func, context) {
     if (this._isdone) {
         p = func.apply(context, this.result);
     } else {
-        p = new Promise();
+        /*p = new Promise();
         this._callbacks.push(function () {
             var res = func.apply(context, arguments);
             if (res && typeof res.then === 'function') {
                 res.then(p.done, p);
             }
-        });
+        });*/    // 这块执行时出问题
+        this._callbacks.push(func.bind(this,arguments))
     }
-    return p;
+    return this;
 };
 
 Promise.prototype.done = function() {

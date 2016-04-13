@@ -34,7 +34,7 @@ var FX = {
             if (progress > 1) {
                 progress = 1;
             }
-            options.progress = progress;
+            // options.progress = progress;  没必要增加这个属性
             var delta = options.delta(progress);
             options.step(delta);
             if (progress == 1) {
@@ -48,7 +48,7 @@ var FX = {
         this.animate({
             duration: options.duration,
             delta: function(progress) {
-                progress = this.progress;
+                //progress = this.progress;
                 return FX.easing.swing(progress);
             },
             complete: options.complete,
@@ -62,7 +62,7 @@ var FX = {
         this.animate({
             duration: options.duration,
             delta: function(progress) {
-                progress = this.progress;
+                //progress = this.progress;
                 return FX.easing.swing(progress);
             },
             complete: options.complete,
