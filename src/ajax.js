@@ -33,3 +33,11 @@ Lettuce.send = function(url,method,callback,data){
         }
     }
 }
+Lettuce.formatParams(data) {
+    var arr = [];
+    for (var name in data) {
+        arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+    }
+    arr.push(("v=" + Math.random()).replace(".",""));
+    return arr.join("&");
+}
