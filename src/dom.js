@@ -14,5 +14,5 @@ window.L = Lettuce.dom = function(selector, context, undefined) {
 	// now pass the selector without the key/first character
 	var el = (((context === undefined) ? document: context)[matches](selector.slice(1)));
 	// if there is one element than return the 0 element
-	return ((el.length < 2) ? el[0]: el);
+	return ((el && el.length < 2) ? el[0]: el);
 };
