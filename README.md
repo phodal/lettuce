@@ -8,15 +8,15 @@
 
 ![Lettuce](./docs/lettuce.png)
 
-#Lettuce, Mobile Framework for romantic#
+# Lettuce, Mobile Framework for romantic#
  
 Lettuce is a Small & Powerful Framework for Romantic.
 
 > Lettuce 是一个轻巧的移动开发学习框架。
 
-##Lettuce Usage(用法)##
+## Lettuce Usage(用法)
 
-###Class(类)###
+### Class(类)
 
 ```javascript
 var L = new lettuce();
@@ -24,7 +24,7 @@ var zero = function(){};
 var sub = new L.Class(zero);
 ```
 
-###Template(模板)###
+### Template(模板)
 
 ```javascript
 var L = new lettuce();
@@ -34,7 +34,7 @@ var data = {
 var result = L.Template.tmpl("<h3>{%=o.title%}</h3>\n!@#$%^&*()-=", data);
 ```
 
-###Router(路由)###
+### Router(路由)
 
 ```javascript
 var L = new lettuce();
@@ -45,9 +45,9 @@ var check = L.Router
             .load();;
 ```
 
-###Effect(效果)###
+### Effect(效果)
 
-####淡出####
+#### 淡出
 
 ```javascript
 L.FX.fadeOut(document.getElementById('content'), {
@@ -56,7 +56,7 @@ L.FX.fadeOut(document.getElementById('content'), {
 });
 ```
 
-####淡入####
+#### 淡入
 
 ```javascript
 L.FX.fadeIn(document.getElementById('content'), {
@@ -65,7 +65,7 @@ L.FX.fadeIn(document.getElementById('content'), {
 });
 ```
 
-###Promise###
+### Promise
 
 ```javascript
 function late(n) {
@@ -78,7 +78,7 @@ late(100).then(
 ).done();
 ```
 
-###Ajax###
+### Ajax
 
 ```javascript
 lettuce.get('/bower.json', function(result){
@@ -93,7 +93,7 @@ lettuce.post("http://127.0.0.1:5000/some", "something", function(data){
 })
 ```
 
-###AMD
+### AMD
 
 ``RequireJS Config``
 
@@ -116,7 +116,7 @@ define(['lettuce'],
 });    
 ```
 
-##Single Page Application Example(单页面应用)##
+## Single Page Application Example(单页面应用)
 
 1.new a instance
 
@@ -157,12 +157,13 @@ L.Router
     .load();
 ```
 
-##ShowCase##
+## ShowCase
 
 - 一个情人节礼物: [http://valentine.phodal.com/](http://valentine.phodal.com/)
 - 官网: [http://lettuce.phodal.com/](http://lettuce.phodal.com/)
 
-##License##
+License
+---
 
 © 2015 [Phodal Huang](http://www.phodal.com). This code is distributed under the MIT license. See `LICENSE.txt` in this directory.
 
